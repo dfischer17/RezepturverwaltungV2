@@ -22,23 +22,27 @@ namespace Program
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        private readonly MyDbContext db;
+
+        public MainWindow(MyDbContext db)
         {
             InitializeComponent();
+            this.db = db;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
-                var db = new MyDbContext();
-                
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
 
                 var addResourceToRecipeWindow = new AddResourceToRecipeWindow(db);
                 var mainViewModel = new MainViewModel(db, addResourceToRecipeWindow);
                 this.DataContext = mainViewModel;
+
+                int nr = db.Resources.Count();
+                Title = $"{nr} Resources";
 
                 //db.Dispose();
             }

@@ -23,16 +23,16 @@ namespace Program
     {
         private readonly MyDbContext db;
 
-        public AddResourceToRecipeWindow(MyDbContext db)
+        public AddResourceToRecipeWindow(MyDbContext db, AddResourceToRecipeViewModel addResourceToRecipeViewModel)
         {
             InitializeComponent();
             this.db = db;
+            DataContext = addResourceToRecipeViewModel;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var addResourceToRecipeViewModel = new AddResourceToRecipeViewModel(db);
-            this.DataContext = addResourceToRecipeViewModel;
+
         }
     }
 }
