@@ -1,0 +1,191 @@
+﻿<Window x:Class="Program.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Program"
+        xmlns:viewmodel="clr-namespace:Viemodel;assembly=Viemodel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="700" Width="800"
+        Loaded="Window_Loaded">
+    <Window.DataContext>
+        <viewmodel:MainViewModel></viewmodel:MainViewModel>
+    </Window.DataContext>
+    <Grid>
+        <TabControl>
+            <TabItem Header="Rohstoffe">
+                <Grid DataContext="{Binding ResourceViewModel}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Name="resourceGrid" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding Resources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
+                            <DataGridTextColumn Binding="{Binding Amount}" Header="Menge"/>
+                            <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
+                            <DataGridTextColumn Binding="{Binding Netprice}" Header="Nettopreis"/>
+                            <DataGridTextColumn Binding="{Binding Taxrate}" Header="Steuersatz"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Grid.Column="0" Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Bezeichnung:"></Label>
+                            <TextBox Width="200px" Text="{Binding DescriptionTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Menge:"></Label>
+                            <TextBox Width="200px" Text="{Binding AmountTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Einheit:"></Label>
+                            <TextBox Width="200px" Text="{Binding Unit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Nettopreis:"></Label>
+                            <TextBox Width="200px" Text="{Binding NetpriceTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Steuerprozentsatz:"></Label>
+                            <TextBox Width="200px" Text="{Binding TaxrateTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </StackPanel>
+                        <Button Content="Rohstoff hinzufügen" Command="{Binding AddResourceCommand, Mode=OneWay}"></Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Kunden">
+                <Grid DataContext="{Binding CustomerViewModel}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Grid.Row="0" AutoGenerateColumns="False" ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, AsyncState=True}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding Lastname}" Header="Nachname"/>
+                            <DataGridTextColumn Binding="{Binding Firstname}" Header="Vorname"/>
+                            <DataGridTextColumn Binding="{Binding Phonenumber}" Header="Telefonnummer"/>
+                            <DataGridTextColumn Binding="{Binding Email}" Header="Email"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <StackPanel Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Nachname"></Label>
+                            <TextBox Width="200px" Text="{Binding LastnameTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Vorname"></Label>
+                            <TextBox Width="200px" Text="{Binding FirstnameTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Telefonnummer"></Label>
+                            <TextBox Width="200px" Text="{Binding Phonenumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Email"></Label>
+                            <TextBox Width="200px" Text="{Binding EmailTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </StackPanel>
+                        <Button Content="Kunden anlegen" Command="{Binding AddCustomerCommand, Mode=OneWay}"></Button>
+                    </StackPanel>
+                </Grid>         
+            </TabItem>
+            <TabItem Header="Rezepte">
+                <Grid DataContext="{Binding RecipeViewModel}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+
+                    <DataGrid Name="recipeGrid" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="0" SelectedItem="{Binding SelectedRecipe}" ItemsSource="{Binding Recipes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
+                            <DataGridTextColumn Binding="{Binding Costprice}" Header="Produktionspreis"/>
+                            <DataGridTextColumn Binding="{Binding Amount}" Header="Menge/Rezept"/>
+                            <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <StackPanel Grid.Column="0" Grid.Row="1">
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Bezeichnung:"></Label>
+                            <TextBox Width="200px" Text="{Binding NameTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Menge:"></Label>
+                            <TextBox Width="200px" Text="{Binding AmountTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Einheit:"></Label>
+                            <TextBox Width="200px" Text="{Binding UnitTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                            <Label Content="Produktionspreis:"></Label>
+                            <TextBox Width="200px" Text="{Binding CostpriceTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
+                        </StackPanel>
+                        <Button Content="Rezept hinzufügen" Command="{Binding AddRecipeCommand, Mode=OneWay}"></Button>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="0" Grid.Column="1">
+                        <DataGrid Name="recipeDetails" Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding RecipeResources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
+                                <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
+                                <DataGridTextColumn Binding="{Binding Amount}" Header="Menge"/>
+                                <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Content="Neue Zutat hinzufügen" Command="{Binding OpenAddResourceToRecipeWindowCommand, Mode=OneWay}"></Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Bestellungen">
+                <Grid DataContext="{Binding OrderViewModel}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*"></RowDefinition>
+                        <RowDefinition Height="1*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <ListView SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}" Grid.Row="0" Grid.Column="0">
+                    </ListView>
+                    <StackPanel Grid.Row="0" Grid.Column="1">
+                        <DataGrid SelectedItem="{Binding SelectedOrder}" AutoGenerateColumns="False" ItemsSource="{Binding Orders}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding OrderDate}" Header="Bestelldatum"/>
+                                <DataGridTextColumn Binding="{Binding DeliveryDate}" Header="Lieferdatum"/>
+                                <DataGridTextColumn Binding="{Binding Status}" Header="Status"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Command="{Binding AddOrderCommand}" Margin="0,20,0,0" Content="Bestellung hinzufügen">
+                        </Button>
+                    </StackPanel>
+                    
+                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Recipes}" Grid.Row="1" Grid.Column="1">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
+                            <DataGridTextColumn Binding="{Binding Amount}" Header="Menge"/>
+                            <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
+                            <DataGridTextColumn Binding="{Binding Retailprice}" Header="Preis"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
