@@ -32,8 +32,8 @@ namespace Viemodel
         public ObservableCollection<Customer> Customers
         {
             get => customers;
-            set 
-            { 
+            set
+            {
                 customers = value;
                 RaisePropertyChangedEvent(nameof(Customers));
             }
@@ -43,10 +43,11 @@ namespace Viemodel
         public Customer SelectedCustomer
         {
             get => selectedCustomer;
-            set 
+            set
             {
                 selectedCustomer = value;
                 Orders = db.Orders.Where(x => x.CustomerId == SelectedCustomer.Id).AsObservableCollection();
+                Recipes = new ObservableCollection<Recipe>();
                 RaisePropertyChangedEvent(nameof(SelectedCustomer));
             }
         }
@@ -56,7 +57,7 @@ namespace Viemodel
         public ObservableCollection<Order> Orders
         {
             get => orders;
-            set 
+            set
             {
                 orders = value;
                 RaisePropertyChangedEvent(nameof(Orders));
@@ -66,11 +67,16 @@ namespace Viemodel
 
         public Order SelectedOrder
         {
-            get => selectedOrder; 
-            set 
+            get => selectedOrder;
+            set
             {
                 selectedOrder = value;
-                Recipes = db.OrderDetails.Where(x => x.OrderId == SelectedOrder.Id).Select(x => x.Recipe).AsObservableCollection();
+                if (selectedOrder != null)
+                {
+                    Recipes = db.OrderDetails.Where(x => x.OrderId == SelectedOrder.Id).Select(x => x.Recipe).AsObservableCollection();
+
+                }
+
                 RaisePropertyChangedEvent(nameof(SelectedOrder));
             }
         }
@@ -79,7 +85,7 @@ namespace Viemodel
         public ObservableCollection<Recipe> Recipes
         {
             get => recipes;
-            set 
+            set
             {
                 recipes = value;
                 RaisePropertyChangedEvent(nameof(Recipes));
