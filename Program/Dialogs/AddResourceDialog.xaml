@@ -1,0 +1,38 @@
+﻿<Window x:Class="Program.Dialogs.AddResourceDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Program.Dialogs"
+        xmlns:viewmodel.Viewmodels="clr-namespace:Viemodel"
+        mc:Ignorable="d"
+        Title="AddResourceDialog">
+    <Window.DataContext>
+        <viewmodel.Viewmodels:ResourceViewModel></viewmodel.Viewmodels:ResourceViewModel>
+    </Window.DataContext>
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <Label Content="Bezeichnung:"></Label>
+                <TextBox Width="200px" Text="{Binding DescriptionTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <Label Content="Menge:"></Label>
+                <TextBox Width="200px" Text="{Binding AmountTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <Label Content="Einheit:"></Label>
+                <TextBox Width="200px" Text="{Binding Unit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <Label Content="Nettopreis:"></Label>
+                <TextBox Width="200px" Text="{Binding NetpriceTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <Label Content="Steuerprozentsatz:"></Label>
+                <TextBox Width="200px" Text="{Binding TaxrateTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+            </StackPanel>
+            <Button Content="Rohstoff hinzufügen" Command="{Binding AddResourceCommand, Mode=OneWay}"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Program"
-        xmlns:viewmodel="clr-namespace:Viemodel;assembly=Viemodel"
+        xmlns:local="clr-namespace:Program" 
+        xmlns:viewmodel.Viewmodels="clr-namespace:Viemodel"
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="800"
         Loaded="Window_Loaded">
     <Window.DataContext>
-        <viewmodel:MainViewModel></viewmodel:MainViewModel>
+        <viewmodel.Viewmodels:MainViewModel></viewmodel.Viewmodels:MainViewModel>
     </Window.DataContext>
     <Grid>
         <TabControl>
@@ -34,29 +34,7 @@
                             <DataGridTextColumn Binding="{Binding Taxrate}" Header="Steuersatz"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <StackPanel Grid.Column="0" Grid.Row="1">
-                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                            <Label Content="Bezeichnung:"></Label>
-                            <TextBox Width="200px" Text="{Binding DescriptionTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                            <Label Content="Menge:"></Label>
-                            <TextBox Width="200px" Text="{Binding AmountTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                            <Label Content="Einheit:"></Label>
-                            <TextBox Width="200px" Text="{Binding Unit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                            <Label Content="Nettopreis:"></Label>
-                            <TextBox Width="200px" Text="{Binding NetpriceTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                            <Label Content="Steuerprozentsatz:"></Label>
-                            <TextBox Width="200px" Text="{Binding TaxrateTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                        </StackPanel>
-                        <Button Content="Rohstoff hinzufügen" Command="{Binding AddResourceCommand, Mode=OneWay}"></Button>
-                    </StackPanel>
+                    <Button Grid.Column="0" Grid.Row="1" Content="Rohstoff hinzufügen"  ></Button>
                 </Grid>
             </TabItem>
 
