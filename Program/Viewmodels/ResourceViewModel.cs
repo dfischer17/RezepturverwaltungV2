@@ -22,6 +22,7 @@ namespace Viemodel
         }
 
         private ObservableCollection<Resource> resources;
+        private Resource selectedResource;
         private string descriptionTxtBox = "";
         private string amountTxtBox = "";
         private string unit = "";
@@ -39,6 +40,13 @@ namespace Viemodel
                 RaisePropertyChangedEvent(nameof(Resources));
             }
         }
+       
+        public Resource SelectedResource
+        {
+            get { return selectedResource; }
+            set { selectedResource = value; }
+        }
+
 
         public string DescriptionTxtBox
         {
@@ -91,11 +99,19 @@ namespace Viemodel
             }
         }
 
+        // Commands
         public ICommand OpenAddResourceDialogCommand => new RelayCommand<string>(
             OpenAddResourceDialog,
             x => x == x
             );
 
+        public ICommand OpenEditResourceDialogCommand => new RelayCommand<string>(
+            OpenEditResourceDialog,
+            x => x == x
+            );
+
+
+        // Helper
         private void OpenAddResourceDialog(string obj)
         {
             var addResourceDialog = new AddResourceDialog(db);
@@ -103,6 +119,16 @@ namespace Viemodel
             {
                 addResourceDialog.AddResource();
                 Resources = db.Resources.AsObservableCollection();              
+            }
+        }
+
+        private void OpenEditResourceDialog(string obj)
+        {
+            var editResourceDialog = new EditResourceDialog(db, SelectedResource);
+            if (editResourceDialog.ShowDialog() == true)
+            {
+                editResourceDialog.EditResource();
+                Resources = db.Resources.AsObservableCollection();
             }
         }
     }
