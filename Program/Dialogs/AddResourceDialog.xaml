@@ -6,33 +6,30 @@
         xmlns:local="clr-namespace:Program.Dialogs"
         xmlns:viewmodel.Viewmodels="clr-namespace:Viemodel"
         mc:Ignorable="d"
-        Title="AddResourceDialog">
-    <Window.DataContext>
-        <viewmodel.Viewmodels:ResourceViewModel></viewmodel.Viewmodels:ResourceViewModel>
-    </Window.DataContext>
+        Title="Rohstoff hinzufügen" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <Label Content="Bezeichnung:"></Label>
-                <TextBox Width="200px" Text="{Binding DescriptionTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Width="200px" Name="descTxtbox"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <Label Content="Menge:"></Label>
-                <TextBox Width="200px" Text="{Binding AmountTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Width="200px" Name="amountTxtbox"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <Label Content="Einheit:"></Label>
-                <TextBox Width="200px" Text="{Binding Unit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Width="200px" Name="unitTxtbox"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <Label Content="Nettopreis:"></Label>
-                <TextBox Width="200px" Text="{Binding NetpriceTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Width="200px" Name="netpriceTxtbox"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <Label Content="Steuerprozentsatz:"></Label>
-                <TextBox Width="200px" Text="{Binding TaxrateTxtBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Width="200px" Name="taxrateTxtbox"></TextBox>
             </StackPanel>
-            <Button Content="Rohstoff hinzufügen" Command="{Binding AddResourceCommand, Mode=OneWay}"></Button>
+            <Button Content="Rohstoff hinzufügen" Click="Button_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>

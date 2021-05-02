@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Database;
+using Database.Entities;
+using MVVM.Tools;
+using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Program.Dialogs
 {
@@ -19,9 +11,39 @@ namespace Program.Dialogs
     /// </summary>
     public partial class AddResourceDialog : Window
     {
+        private readonly MyDbContext db;
+
         public AddResourceDialog()
         {
             InitializeComponent();
+        }
+
+        public AddResourceDialog(MyDbContext db)
+        {
+            InitializeComponent();
+            this.db = db;
+        }
+
+        public void AddResource()
+        {
+            var resource = new Resource
+            {
+                Name = descTxtbox.Text,
+                Amount = double.Parse(amountTxtbox.Text),
+                Unit = unitTxtbox.Text,
+                Netprice = double.Parse(netpriceTxtbox.Text),
+                Taxrate = double.Parse(taxrateTxtbox.Text),
+            };
+
+            db.Resources.Add(resource);
+            db.SaveChanges();
+
+            Debug.WriteLine("AddResource");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            this.DialogResult = true;
         }
     }
 }

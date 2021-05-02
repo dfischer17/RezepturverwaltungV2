@@ -1,12 +1,8 @@
 ﻿using Database;
 using Database.Entities;
 using MVVM.Tools;
-using System;
-using System.Collections.Generic;
+using Program.Dialogs;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Viemodel
@@ -43,7 +39,7 @@ namespace Viemodel
                 RaisePropertyChangedEvent(nameof(Resources));
             }
         }
-        
+
         public string DescriptionTxtBox
         {
             get { return descriptionTxtBox; }
@@ -53,7 +49,7 @@ namespace Viemodel
                 RaisePropertyChangedEvent(nameof(DescriptionTxtBox));
             }
         }
-        
+
         public string AmountTxtBox
         {
             get { return amountTxtBox; }
@@ -78,7 +74,8 @@ namespace Viemodel
         public string NetpriceTxtBox
         {
             get { return netpriceTxtBox; }
-            set {
+            set
+            {
                 netpriceTxtBox = value;
                 RaisePropertyChangedEvent(nameof(NetpriceTxtBox));
             }
@@ -94,28 +91,19 @@ namespace Viemodel
             }
         }
 
-
-        /*Commands*/
-        public ICommand AddResourceCommand => new RelayCommand<string>(
-            AddResource,
-            x => DescriptionTxtBox.Trim().Length > 0
+        public ICommand OpenAddResourceDialogCommand => new RelayCommand<string>(
+            OpenAddResourceDialog,
+            x => x == x
             );
 
-        /*/Helper*/
-        private void AddResource(string obj)
-        {            
-            var resource = new Resource
+        private void OpenAddResourceDialog(string obj)
+        {
+            var addResourceDialog = new AddResourceDialog(db);
+            if (addResourceDialog.ShowDialog() == true)
             {
-                Name = DescriptionTxtBox,
-                Amount = double.Parse(AmountTxtBox),
-                Unit = Unit,
-                Netprice = double.Parse(NetpriceTxtBox),
-                Taxrate = double.Parse(TaxrateTxtBox),
-            };
-
-            db.Resources.Add(resource);
-            db.SaveChanges();
-            Resources = db.Resources.AsObservableCollection();
+                addResourceDialog.AddResource();
+                Resources = db.Resources.AsObservableCollection();              
+            }
         }
     }
 }

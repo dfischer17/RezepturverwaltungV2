@@ -1,9 +1,4 @@
 ﻿using Database;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace Viemodel
@@ -17,8 +12,9 @@ namespace Viemodel
         {
 
         }
+
         public MainViewModel(MyDbContext db, Window addResourceToRecipeWindow)
-        {         
+        {
             this.db = db;
             this.addResourceToRecipeWindow = addResourceToRecipeWindow;
 
@@ -54,7 +50,5 @@ namespace Viemodel
         {
             get => recipeViewModel;
         }
-
-        
     }
 }
