@@ -1,0 +1,30 @@
+﻿<Window x:Class="Program.Dialogs.EditCustomerDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Program.Dialogs"
+        mc:Ignorable="d"
+        Title="Kunden ändern" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel Grid.Row="1">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <Label Content="Nachname"></Label>
+                <TextBox Width="200px" Name="lastnameTxtbox"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <Label Content="Vorname"></Label>
+                <TextBox Width="200px" Name="firstnameTxtbox"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <Label Content="Telefonnummer"></Label>
+                <TextBox Width="200px" Name="phoneNbrTxtbox"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <Label Content="Email"></Label>
+                <TextBox Width="200px" Name="emailTxtbox"></TextBox>
+            </StackPanel>
+            <Button Content="Kunden ändern" Click="Button_Click"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

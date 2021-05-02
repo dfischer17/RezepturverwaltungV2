@@ -38,7 +38,7 @@
             <TabItem Header="Kunden">
                 <StackPanel DataContext="{Binding CustomerViewModel}">
 
-                    <DataGrid Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, AsyncState=True}">
+                    <DataGrid Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, AsyncState=True}" SelectedItem="{Binding SelectedCustomer}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                             <DataGridTextColumn Binding="{Binding Lastname}" Header="Nachname"/>
@@ -50,8 +50,8 @@
 
                     <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
                         <Button Content="Kunden hinzufügen" Margin="0 0 10 0" Command="{Binding OpenAddCustomerDialogCommand, Mode=OneWay}"/>
-                        <Button Content="Kunden ändern" Margin="0 0 10 0" Command="{Binding OpenEditResourceDialogCommand, Mode=OneWay}"/>
-                        <Button Content="Kunden löschen" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"/>
+                        <Button Content="Kunden ändern" Margin="0 0 10 0" Command="{Binding OpenEditCustomerDialogCommand, Mode=OneWay}"/>
+                        <Button Content="Kunden löschen" Command="{Binding DeleteSelectedCustomerCommand, Mode=OneWay}"/>
                     </StackPanel>
                 </StackPanel>         
             </TabItem>
