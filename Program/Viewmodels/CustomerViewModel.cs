@@ -1,8 +1,10 @@
 ﻿using Database;
 using Database.Entities;
 using MVVM.Tools;
+using Program.Dialogs;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows.Input;
 
 namespace Viemodel
@@ -79,26 +81,50 @@ namespace Viemodel
             }
         }
 
-        /*Commands*/
-        public ICommand AddCustomerCommand => new RelayCommand<string>(
-            AddCustomer,
-            x => LastnameTxt.Trim().Length > 0
+        // Commands
+        public ICommand OpenAddCustomerDialogCommand => new RelayCommand<string>(
+            OpenAddCustomerDialog,
+            x => x == x
             );
 
-        /*/Helper*/
-        private void AddCustomer(string obj)
-        {
-            var customer = new Customer
-            {
-                Lastname = LastnameTxt,
-                Firstname = FirstnameTxt,
-                Phonenumber = long.Parse(Phonenumber),
-                Email = EmailTxt,
-            };
+        //public ICommand OpenEditCustomerDialogCommand => new RelayCommand<string>(
+        //    OpenEditCustomerDialog,
+        //    x => SelectedCustomer != null
+        //    );
 
-            db.Customers.Add(customer);
-            db.SaveChanges();
-            Customers = db.Customers.AsObservableCollection();
+        //public ICommand DeleteSelectedCustomerCommand => new RelayCommand<string>(
+        //    DeleteSelecedCustomer,
+        //    x => SelectedCustomer != null
+        //    );
+
+
+        // Helper
+        private void OpenAddCustomerDialog(string obj)
+        {
+            var addCustomerDialog = new AddCustomerDialog(db);
+            if (addCustomerDialog.ShowDialog() == true)
+            {
+                addCustomerDialog.AddCustomer();
+                Customers = db.Customers.AsObservableCollection();
+            }
         }
+
+        //private void OpenEditCustomerDialog(string obj)
+        //{
+        //    var editCustomerDialog = new EditCustomerDialog(db, SelectedCustomer);
+        //    if (editCustomerDialog.ShowDialog() == true)
+        //    {
+        //        editCustomerDialog.EditResource();
+        //        Customers = db.Customers.AsObservableCollection();
+        //    }
+        //}
+
+        //private void DeleteSelecedCustomer(string obj)
+        //{
+        //    var deleteCustomer = db.Customers.Single(x => x.Id == SelectedCustomer.Id);
+        //    db.Customers.Remove(deleteCustomer);
+        //    db.SaveChanges();
+        //    Customers = db.Customers.AsObservableCollection();
+        //}
     }
 }

@@ -36,13 +36,9 @@
             </TabItem>
 
             <TabItem Header="Kunden">
-                <Grid DataContext="{Binding CustomerViewModel}">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
+                <StackPanel DataContext="{Binding CustomerViewModel}">
 
-                    <DataGrid Grid.Row="0" AutoGenerateColumns="False" ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, AsyncState=True}">
+                    <DataGrid Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, AsyncState=True}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                             <DataGridTextColumn Binding="{Binding Lastname}" Header="Nachname"/>
@@ -52,26 +48,12 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <StackPanel Grid.Row="1">
-                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                            <Label Content="Nachname"></Label>
-                            <TextBox Width="200px" Text="{Binding LastnameTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                            <Label Content="Vorname"></Label>
-                            <TextBox Width="200px" Text="{Binding FirstnameTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                            <Label Content="Telefonnummer"></Label>
-                            <TextBox Width="200px" Text="{Binding Phonenumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                            <Label Content="Email"></Label>
-                            <TextBox Width="200px" Text="{Binding EmailTxt, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"></TextBox>
-                        </StackPanel>
-                        <Button Content="Kunden anlegen" Command="{Binding AddCustomerCommand, Mode=OneWay}"></Button>
+                    <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
+                        <Button Content="Kunden hinzufügen" Margin="0 0 10 0" Command="{Binding OpenAddCustomerDialogCommand, Mode=OneWay}"/>
+                        <Button Content="Kunden ändern" Margin="0 0 10 0" Command="{Binding OpenEditResourceDialogCommand, Mode=OneWay}"/>
+                        <Button Content="Kunden löschen" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"/>
                     </StackPanel>
-                </Grid>         
+                </StackPanel>         
             </TabItem>
             <TabItem Header="Rezepte">
                 <Grid DataContext="{Binding RecipeViewModel}">
