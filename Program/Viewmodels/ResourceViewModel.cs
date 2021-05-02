@@ -3,6 +3,7 @@ using Database.Entities;
 using MVVM.Tools;
 using Program.Dialogs;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows.Input;
 
 namespace Viemodel
@@ -110,6 +111,11 @@ namespace Viemodel
             x => SelectedResource != null
             );
 
+        public ICommand DeleteSelectedResourceCommand => new RelayCommand<string>(
+            DeleteSelecedResource,
+            x => SelectedResource != null
+            );
+
 
         // Helper
         private void OpenAddResourceDialog(string obj)
@@ -130,6 +136,14 @@ namespace Viemodel
                 editResourceDialog.EditResource();
                 Resources = db.Resources.AsObservableCollection();
             }
+        }
+
+        private void DeleteSelecedResource(string obj)
+        {
+            var deleteResource = db.Resources.Single(x => x.Id == SelectedResource.Id);
+            db.Resources.Remove(deleteResource);
+            db.SaveChanges();
+            Resources = db.Resources.AsObservableCollection();
         }
     }
 }
