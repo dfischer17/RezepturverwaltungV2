@@ -27,9 +27,9 @@
                     </DataGrid>
 
                     <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
-                        <Button Content="Rohstoff hinzufügen" Margin="0 0 10 0" Command="{Binding OpenAddResourceDialogCommand, Mode=OneWay}"/>
-                        <Button Content="Rohstoff ändern" Margin="0 0 10 0" Command="{Binding OpenEditResourceDialogCommand, Mode=OneWay}"/>
-                        <Button Content="Rohstoff löschen" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"/>
+                        <Button Content="Rohstoff hinzufügen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddResourceDialogCommand, Mode=OneWay}"/>
+                        <Button Content="Rohstoff ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditResourceDialogCommand, Mode=OneWay}"/>
+                        <Button Content="Rohstoff löschen" Background="Red" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"/>
                     </StackPanel>
                     
                 </StackPanel>
@@ -49,9 +49,9 @@
                     </DataGrid>
 
                     <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
-                        <Button Content="Kunden hinzufügen" Margin="0 0 10 0" Command="{Binding OpenAddCustomerDialogCommand, Mode=OneWay}"/>
-                        <Button Content="Kunden ändern" Margin="0 0 10 0" Command="{Binding OpenEditCustomerDialogCommand, Mode=OneWay}"/>
-                        <Button Content="Kunden löschen" Command="{Binding DeleteSelectedCustomerCommand, Mode=OneWay}"/>
+                        <Button Content="Kunden hinzufügen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddCustomerDialogCommand, Mode=OneWay}"/>
+                        <Button Content="Kunden ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditCustomerDialogCommand, Mode=OneWay}"/>
+                        <Button Content="Kunden löschen" Background="Red" Command="{Binding DeleteSelectedCustomerCommand, Mode=OneWay}"/>
                     </StackPanel>
                 </StackPanel>         
             </TabItem>
