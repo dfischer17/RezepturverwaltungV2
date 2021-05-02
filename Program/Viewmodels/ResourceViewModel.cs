@@ -107,7 +107,7 @@ namespace Viemodel
 
         public ICommand OpenEditResourceDialogCommand => new RelayCommand<string>(
             OpenEditResourceDialog,
-            x => x == x
+            x => SelectedResource != null
             );
 
 
