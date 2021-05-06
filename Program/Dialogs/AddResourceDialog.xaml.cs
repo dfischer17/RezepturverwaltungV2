@@ -29,7 +29,7 @@ namespace Program.Dialogs
             var resource = new Resource
             {
                 Name = descTxtbox.Text,
-                Amount = double.Parse(amountTxtbox.Text),
+                UnitsinStock = double.Parse(amountTxtbox.Text),
                 Unit = unitTxtbox.Text,
                 Netprice = double.Parse(netpriceTxtbox.Text),
                 Taxrate = double.Parse(taxrateTxtbox.Text),

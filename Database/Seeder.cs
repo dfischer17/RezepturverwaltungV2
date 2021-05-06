@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +22,7 @@ namespace Database
             {
                 Id = 1,
                 Name = "Aloe Vera 10-fach",
-                Amount = 10,
+                UnitsinStock = 10,
                 Netprice = 1.20,
                 Taxrate = 0.2,
                 Unit = "ml",
@@ -29,7 +31,7 @@ namespace Database
             {
                 Id = 2,
                 Name = "Aloe Vera Gel",
-                Amount = 15,
+                UnitsinStock = 15,
                 Netprice = 4.8,
                 Taxrate = 0.2,
                 Unit = "ml",
@@ -38,7 +40,7 @@ namespace Database
             {
                 Id = 3,
                 Name = "Alpha-Bisabolol",
-                Amount = 6,
+                UnitsinStock = 6,
                 Netprice = 4.8,
                 Taxrate = 0.2,
                 Unit = "ml",
@@ -47,7 +49,7 @@ namespace Database
             {
                 Id = 4,
                 Name = "Bienenwachs weiß kbA",
-                Amount = 9,
+                UnitsinStock = 9,
                 Netprice = 7.0,
                 Taxrate = 0.15,
                 Unit = "g",
@@ -143,7 +145,7 @@ namespace Database
                 DeliveryDate = DateTime.Now.AddDays(1),
                 Status = Status.Open,
 
-            }); 
+            });
             modelBuilder.Entity<Order>().HasData(new Order
             {
                 Id = 2,
@@ -166,7 +168,7 @@ namespace Database
             {
                 Id = 1,
                 OrderId = 1,
-                RecipeId= 1,
+                RecipeId = 1,
                 Quantity = 5,
             });
             modelBuilder.Entity<OrderDetail>().HasData(new OrderDetail
@@ -185,9 +187,31 @@ namespace Database
             });
 
         }
-        public static void Seed(this ModelBuilder modelBuilder)
+        public static void Seed()
         {
-            //Implement
+
+        }
+        public static void SeedResources(this ModelBuilder modelBuilder, string filename)
+        {
+            //Seed Resources
+            var lines = File.ReadAllLines(filename);
+            foreach (var line in lines)
+            {
+                var values = line.Split(";");
+                
+                if (values[3] == "" || values[3].Trim() == "-") values[3] = "0";
+                if (values[4] == "") values[4] = "0";
+
+                modelBuilder.Entity<Resource>().HasData(new Resource
+                {
+                    Id = Int32.Parse(values[0]),
+                    Name = values[1],
+                    UnitsinStock = Convert.ToDouble(values[2].Trim()),
+                    Netprice = Convert.ToDouble(values[3].Trim()),
+                    Taxrate = Convert.ToDouble(values[4].Trim()),
+                    Unit = values[5].Trim(),
+                });
+            }
         }
     }
 }

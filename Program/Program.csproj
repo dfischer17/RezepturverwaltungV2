@@ -11,4 +11,10 @@
     <ProjectReference Include="..\MVVM.Tools\MVVM.Tools.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Rohstoffe.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

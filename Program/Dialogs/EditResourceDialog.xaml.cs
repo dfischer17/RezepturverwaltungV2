@@ -30,7 +30,7 @@ namespace Program.Dialogs
             netpriceTxtbox.Text = selectedResource.Netprice.ToString();
             taxrateTxtbox.Text = selectedResource.Taxrate.ToString();
             unitTxtbox.Text = selectedResource.Unit;
-            amountTxtbox.Text = selectedResource.Amount.ToString();
+            amountTxtbox.Text = selectedResource.UnitsinStock.ToString();
         }
 
         public void EditResource()
@@ -40,7 +40,7 @@ namespace Program.Dialogs
             editResource.Netprice = double.Parse(netpriceTxtbox.Text);
             editResource.Taxrate = double.Parse(taxrateTxtbox.Text);
             editResource.Unit = unitTxtbox.Text;
-            editResource.Amount = double.Parse(amountTxtbox.Text);
+            editResource.UnitsinStock = double.Parse(amountTxtbox.Text);
 
             db.SaveChanges();
         }

@@ -6,7 +6,7 @@ namespace Database.Entities
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public double Amount { get; set; }
+        public double UnitsinStock { get; set; }
         public string Unit { get; set; }
         public double Netprice { get; set; }
         public double Taxrate { get; set; }
@@ -19,8 +19,8 @@ namespace Database.Entities
 
         private double PricePerUnit(bool gross)
         {
-            if (gross) return Amount * Netprice;
-            return Amount * Netprice * (Taxrate + 1);
+            if (gross) return UnitsinStock * Netprice;
+            return UnitsinStock * Netprice * (Taxrate + 1);
         }
     }
 }
