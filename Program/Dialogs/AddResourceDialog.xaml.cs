@@ -36,9 +36,7 @@ namespace Program.Dialogs
             };
 
             db.Resources.Add(resource);
-            db.SaveChanges();
-
-            Debug.WriteLine("AddResource");
+            db.SaveChanges();        
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

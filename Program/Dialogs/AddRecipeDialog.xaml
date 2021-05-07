@@ -1,0 +1,34 @@
+﻿<Window x:Class="Program.Dialogs.AddRecipeDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Program.Dialogs"
+        mc:Ignorable="d"
+        Title="Rezept hinzufügen" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <Label Content="Bezeichnung:"></Label>
+                <TextBox Name="descTxtbox" Width="200px"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <Label Content="Menge:"></Label>
+                <TextBox Name="amountTxtbox" Width="200px"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <Label Content="Einheit:"></Label>
+                <TextBox Name="unitTxtbox" Width="200px"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <Label Content="Produktionspreis:"></Label>
+                <TextBox Name="prodPrice" Width="200px"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                <Label Content="Verkaufspreis:"></Label>
+                <TextBox Name="retailPrice" Width="200px"></TextBox>
+            </StackPanel>
+            <Button Content="Rezept hinzufügen" Click="Button_Click"></Button>
+        </StackPanel>
+    </Grid>
+</Window>

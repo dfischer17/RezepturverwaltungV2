@@ -1,6 +1,7 @@
 ﻿using Database;
 using Database.Entities;
 using MVVM.Tools;
+using Program.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,6 +27,7 @@ namespace Viemodel
 
         //Properties
         private ObservableCollection<Recipe> recipes;
+        private Recipe selectedRecipe;
         private string name = "";
         private string costprice = "";
         private string amount = "";
@@ -78,19 +80,24 @@ namespace Viemodel
                 RaisePropertyChangedEvent(nameof(UnitTxtBox));
             }
         }
-        private Recipe selectedRecipe;
-
+                
         public Recipe SelectedRecipe
         {
-            get => selectedRecipe;
-            set 
+            get { return selectedRecipe; }
+            set
             {
                 selectedRecipe = value;
-                StaticValues.selectedRecipe = selectedRecipe.Id; // TODO notwendig?
-                RecipeResources = db.RecipeDetails.Where(x => x.RecipeId == SelectedRecipe.Id).Select(x => x.Resource).AsObservableCollection();
-                RaisePropertyChangedEvent(nameof(SelectedRecipe));
+
+                if (selectedRecipe != null)
+                {
+                    StaticValues.selectedRecipe = selectedRecipe.Id; // TODO notwendig?
+                    RecipeResources = db.RecipeDetails.Where(x => x.RecipeId == selectedRecipe.Id).Select(x => x.Resource).AsObservableCollection();
+                    RaisePropertyChangedEvent(nameof(selectedRecipe));
+                }                
             }
         }
+
+
         private ObservableCollection<Resource> recipeResources;
 
         public ObservableCollection<Resource> RecipeResources
@@ -103,12 +110,10 @@ namespace Viemodel
             }
         }
 
-
-
-        /*Commands*/
-        public ICommand AddRecipeCommand => new RelayCommand<string>(
-            AddRecipe,
-            x => NameTxtBox.Trim().Length > 0
+        /*Commands*/      
+        public ICommand OpenAddRecipeDialogCommand => new RelayCommand<string>(
+            OpenAddRecipeDialog,
+            x => x == x
             );
 
         public ICommand OpenAddResourceToRecipeWindowCommand => new RelayCommand<string>(
@@ -116,17 +121,42 @@ namespace Viemodel
             x => x == x
             );
 
-        /*/Helper*/
-        private void AddRecipe(string obj)
+        public ICommand OpenEditRecipeDialogCommand => new RelayCommand<string>(
+            OpenEditRecipeDialog,
+            x => SelectedRecipe != null
+            );
+
+        public ICommand DeleteSelectedRecipeCommand => new RelayCommand<string>(
+            DeleteSelecedRecipe,
+            x => SelectedRecipe != null
+            );
+
+
+        // Helper
+        private void OpenAddRecipeDialog(string obj)
         {
-            var recipe = new Recipe
+            var addRecipeDialog = new AddRecipeDialog(db);
+            if (addRecipeDialog.ShowDialog() == true)
             {
-                Name = NameTxtBox,
-                Amount = int.Parse(AmountTxtBox),
-                Costprice = double.Parse(CostpriceTxtBox),
-                Unit = UnitTxtBox,
-            };
-            db.Recipes.Add(recipe);
+                addRecipeDialog.AddRecipe();
+                Recipes = db.Recipes.AsObservableCollection();
+            }
+        }
+
+        private void OpenEditRecipeDialog(string obj)
+        {
+            var editRecipeDialog = new EditRecipeDialog(db, SelectedRecipe);
+            if (editRecipeDialog.ShowDialog() == true)
+            {
+                editRecipeDialog.EditRecipe();
+                Recipes = db.Recipes.AsObservableCollection();
+            }
+        }
+
+        private void DeleteSelecedRecipe(string obj)
+        {
+            var deleteRecipe = db.Recipes.Single(x => x.Id == SelectedRecipe.Id);
+            db.Recipes.Remove(deleteRecipe);
             db.SaveChanges();
             Recipes = db.Recipes.AsObservableCollection();
         }
