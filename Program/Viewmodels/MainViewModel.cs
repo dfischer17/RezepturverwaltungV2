@@ -6,24 +6,22 @@ namespace Viemodel
     public class MainViewModel
     {
         private readonly MyDbContext db;
-        private readonly Window addResourceToRecipeWindow;
 
         public MainViewModel()
         {
 
         }
 
-        public MainViewModel(MyDbContext db, Window addResourceToRecipeWindow)
+        public MainViewModel(MyDbContext db)
         {
-            this.db = db;
-            this.addResourceToRecipeWindow = addResourceToRecipeWindow;
+            this.db = db;        
 
             //View Models
             customerViewModel = new CustomerViewModel(db);
             resourceViewModel = new ResourceViewModel(db);
             orderViewModel = new OrderViewModel(db);
 
-            recipeViewModel = new RecipeViewModel(db, addResourceToRecipeWindow);
+            recipeViewModel = new RecipeViewModel(db);
         }
         private OrderViewModel orderViewModel;
 

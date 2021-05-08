@@ -16,12 +16,10 @@ namespace Viemodel
     public class RecipeViewModel: ObservableObject
     {
         private readonly MyDbContext db;
-        private readonly Window addResourceToRecipeWindow;
 
-        public RecipeViewModel(MyDbContext db, Window addResourceToRecipeWindow)
+        public RecipeViewModel(MyDbContext db)
         {
-            this.db = db;
-            this.addResourceToRecipeWindow = addResourceToRecipeWindow;
+            this.db = db;            
             Recipes = db.Recipes.AsObservableCollection();
         }
 
@@ -90,7 +88,6 @@ namespace Viemodel
 
                 if (selectedRecipe != null)
                 {
-                    StaticValues.selectedRecipe = selectedRecipe.Id; // TODO notwendig?
                     RecipeResources = db.RecipeDetails.Where(x => x.RecipeId == selectedRecipe.Id).Select(x => x.Resource).AsObservableCollection();
                     RaisePropertyChangedEvent(nameof(selectedRecipe));
                 }                
@@ -116,11 +113,11 @@ namespace Viemodel
             x => x == x
             );
 
-        public ICommand OpenAddResourceToRecipeWindowCommand => new RelayCommand<string>(
-            OpenAddResourceToRecipeWindow,
-            x => x == x
-            );
-
+        public ICommand OpenAddResourceToRecipeDialogCommand => new RelayCommand<string>(
+             OpenAddResourceToRecipeDialog,
+             x => SelectedRecipe != null
+             );
+        
         public ICommand OpenEditRecipeDialogCommand => new RelayCommand<string>(
             OpenEditRecipeDialog,
             x => SelectedRecipe != null
@@ -130,7 +127,6 @@ namespace Viemodel
             DeleteSelecedRecipe,
             x => SelectedRecipe != null
             );
-
 
         // Helper
         private void OpenAddRecipeDialog(string obj)
@@ -159,11 +155,18 @@ namespace Viemodel
             db.Recipes.Remove(deleteRecipe);
             db.SaveChanges();
             Recipes = db.Recipes.AsObservableCollection();
-        }
+            RecipeResources = new();
+        }        
 
-        private void OpenAddResourceToRecipeWindow(string obj)
+        private void OpenAddResourceToRecipeDialog(string obj)
         {
-            addResourceToRecipeWindow.Show();
+            var addResourceToRecipeDialog = new AddResourceToRecipeDialog(db, SelectedRecipe);
+            if (addResourceToRecipeDialog.ShowDialog() == true)
+            {
+                addResourceToRecipeDialog.AddResourceToRecipe();
+                Recipes = db.Recipes.AsObservableCollection();
+                RecipeResources = db.RecipeDetails.Where(x => x.RecipeId == SelectedRecipe.Id).Select(x => x.Resource).AsObservableCollection();
+            }
         }
     }
 }

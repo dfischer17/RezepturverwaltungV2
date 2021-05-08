@@ -89,7 +89,7 @@
                                 <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Content="Neue Zutat hinzufügen" Command="{Binding OpenAddResourceToRecipeWindowCommand, Mode=OneWay}"></Button>
+                        <Button Content="Neue Zutat hinzufügen" Command="{Binding OpenAddResourceToRecipeDialogCommand, Mode=OneWay}"></Button>
                     </StackPanel>
                 </Grid>
             </TabItem>
