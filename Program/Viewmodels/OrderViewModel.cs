@@ -1,6 +1,7 @@
 ﻿using Database;
 using Database.Entities;
 using MVVM.Tools;
+using Program.Dialogs.Order;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -100,17 +101,21 @@ namespace Viemodel
         /*/Helper*/
         private void AddOrder(string obj)
         {
-            //Order
-            var order = new Order
-            {
-                CustomerId = SelectedCustomer.Id,
-                DeliveryDate = DateTime.Now,
-                OrderDate = DateTime.Now.AddDays(-1),
-            };
-            db.Orders.Add(order);
-            db.SaveChanges();
-            Orders = db.Orders.Where(x => x.CustomerId == SelectedCustomer.Id).AsObservableCollection();
+            var addOrderDialog = new AddOrderDialog();
 
+            if (addOrderDialog.ShowDialog() == true)
+            {
+                var order = new Order
+                {
+                    CustomerId = SelectedCustomer.Id,
+                    DeliveryDate = addOrderDialog.GetDeliverDate(),
+                    OrderDate = addOrderDialog.GetOrderDate(),
+                };
+                db.Orders.Add(order);
+                db.SaveChanges();
+                Orders = db.Orders.Where(x => x.CustomerId == SelectedCustomer.Id).AsObservableCollection();
+            }
+            
             //OrderDetail
             //Implement
         }
