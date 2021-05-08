@@ -60,6 +60,7 @@ namespace Database
                 Name = "Centella 30g",
                 Amount = 30,
                 Costprice = 20.0,
+                Retailprice = 25.0,
                 Unit = "mg",
             });
             modelBuilder.Entity<Recipe>().HasData(new Recipe
@@ -68,6 +69,7 @@ namespace Database
                 Name = "Haarshampoo",
                 Amount = 200,
                 Costprice = 15.0,
+                Retailprice = 20,
                 Unit = "ml",
             });
             modelBuilder.Entity<Recipe>().HasData(new Recipe
@@ -76,6 +78,7 @@ namespace Database
                 Name = "Centella 30g",
                 Amount = 30,
                 Costprice = 20.0,
+                Retailprice = 25,
                 Unit = "mg",
             });
 
