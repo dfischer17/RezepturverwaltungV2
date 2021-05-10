@@ -113,7 +113,7 @@ namespace Viemodel
 
         public ICommand DeleteOrderCommand => new RelayCommand<string>(
            DeleteSelectedOrder,
-           x => SelectedCustomer != null);
+           x => SelectedCustomer != null && SelectedOrder != null);
 
         public ICommand OpenAddRecipeToOrderDialogCommand => new RelayCommand<string>(
            OpenAddRecipeToOrderDialog,
