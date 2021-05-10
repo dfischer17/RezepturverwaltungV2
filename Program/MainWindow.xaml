@@ -19,7 +19,7 @@
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                             <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
-                            <DataGridTextColumn Binding="{Binding Amount}" Header="Menge"/>
+                            <DataGridTextColumn Binding="{Binding Amount}" Header="Lagernd"/>
                             <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
                             <DataGridTextColumn Binding="{Binding Netprice}" Header="Nettopreis"/>
                             <DataGridTextColumn Binding="{Binding Taxrate}" Header="Steuersatz"/>
