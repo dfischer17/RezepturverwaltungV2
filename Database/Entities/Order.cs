@@ -15,6 +15,22 @@ namespace Database.Entities
         public DateTime DeliveryDate { get; set; }
         public Status Status { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
-      
+
+        private string orderDateFormatted;
+
+        public string OrderDateFormatted
+        {
+            get { return OrderDate.ToString("dd.MM.yyyy"); }
+            set { orderDateFormatted = value; }
+        }
+
+        private string delieverDateFormatted;
+
+        public string DelieverDateFormatted
+        {
+            get { return DeliveryDate.ToString("dd.MM.yyyy"); }
+            set { delieverDateFormatted = value; }
+        }
+
     }
 }

@@ -108,8 +108,8 @@
                     <StackPanel Grid.Row="0" Grid.Column="1">
                         <DataGrid IsReadOnly="True" Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding Orders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Binding="{Binding OrderDate}" Header="Bestelldatum"/>
-                                <DataGridTextColumn Binding="{Binding DeliveryDate}" Header="Lieferdatum"/>
+                                <DataGridTextColumn Binding="{Binding OrderDateFormatted}" Header="Bestelldatum"/>
+                                <DataGridTextColumn Binding="{Binding DelieverDateFormatted}" Header="Lieferdatum"/>
                                 <DataGridTextColumn Binding="{Binding Status}" Header="Status"/>
                             </DataGrid.Columns>
                         </DataGrid>
