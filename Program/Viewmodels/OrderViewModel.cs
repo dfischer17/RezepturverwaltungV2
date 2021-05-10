@@ -98,6 +98,10 @@ namespace Viemodel
            AddOrder,
            x => SelectedCustomer != null);
 
+        public ICommand OpenAddRecipeToOrderDialogCommand => new RelayCommand<string>(
+           OpenAddRecipeToOrderDialog,
+           x => SelectedOrder != null);
+
         /*/Helper*/
         private void AddOrder(string obj)
         {
@@ -120,6 +124,14 @@ namespace Viemodel
             //Implement
         }
 
-
+        private void OpenAddRecipeToOrderDialog(String obj)
+        {
+            var addRecipeToOrderDialog = new AddRecipeToOrderDialog(db, selectedOrder);
+            if (addRecipeToOrderDialog.ShowDialog() == true)
+            {
+                addRecipeToOrderDialog.AddRecipeToOrder();
+                Recipes = db.OrderDetails.Where(x => x.OrderId == SelectedOrder.Id).Select(x => x.Recipe).AsObservableCollection();
+            }
+        }
     }
 }

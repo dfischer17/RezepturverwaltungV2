@@ -117,15 +117,18 @@
                         <Button Command="{Binding AddOrderCommand}" Margin="0,20,0,0" Content="Bestellung hinzufügen">
                         </Button>
                     </StackPanel>
-                    
-                    <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Recipes}" Grid.Row="1" Grid.Column="1">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
-                            <DataGridTextColumn Binding="{Binding Amount}" Header="Menge"/>
-                            <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
-                            <DataGridTextColumn Binding="{Binding Retailprice}" Header="Preis"/>
-                        </DataGrid.Columns>
-                    </DataGrid>                    
+
+                    <StackPanel Grid.Row="1" Grid.Column="1">
+                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Recipes}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
+                                <DataGridTextColumn Binding="{Binding Amount}" Header="Menge"/>
+                                <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
+                                <DataGridTextColumn Binding="{Binding Retailprice}" Header="Preis"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Content="Rezept zu Bestellung hinzufügen" Margin="0,20,0,0" Command="{Binding OpenAddRecipeToOrderDialogCommand}"></Button>
+                    </StackPanel>
                 </Grid>
             </TabItem>
         </TabControl>
