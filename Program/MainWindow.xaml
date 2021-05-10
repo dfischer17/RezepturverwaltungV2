@@ -82,7 +82,7 @@
                     </StackPanel>
                                        
                     <StackPanel Grid.Column="1">
-                        <DataGrid Name="recipeDetails" Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding RecipeResources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid Name="recipeDetails" Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding RecipeResources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
@@ -90,7 +90,11 @@
                                 <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Content="Neue Zutat hinzufügen" Command="{Binding OpenAddResourceToRecipeDialogCommand, Mode=OneWay}"></Button>
+                        <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
+                            <Button Content="Neue Zutat hinzufügen" Margin="0 0 10 0" Command="{Binding OpenAddResourceToRecipeDialogCommand, Mode=OneWay}"></Button>
+                            <Button Content="Zutat löschen" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"></Button>
+                        </StackPanel>
+                        
                     </StackPanel>
                 </Grid>
             </TabItem>

@@ -94,6 +94,19 @@ namespace Viemodel
             }
         }
 
+        private Resource selectedResource;
+
+        public Resource SelectedResource
+        {
+            get { return selectedResource; }
+            set
+            {
+                selectedResource = value;
+                RaisePropertyChangedEvent(nameof(SelectedResource));
+            }
+        }
+
+
 
         private ObservableCollection<Resource> recipeResources;
 
@@ -128,6 +141,11 @@ namespace Viemodel
             x => SelectedRecipe != null
             );
 
+        public ICommand DeleteSelectedResourceCommand => new RelayCommand<string>(
+            DeleteSelectedResource,
+            x => SelectedRecipe != null && SelectedResource != null
+            );
+
         // Helper
         private void OpenAddRecipeDialog(string obj)
         {
@@ -156,7 +174,15 @@ namespace Viemodel
             db.SaveChanges();
             Recipes = db.Recipes.AsObservableCollection();
             RecipeResources = new();
-        }        
+        }
+
+        private void DeleteSelectedResource(string obj)
+        {
+            var deleteResource = db.Resources.Single(x => x.Id == SelectedResource.Id);
+            db.Resources.Remove(deleteResource);
+            db.SaveChanges();
+            RecipeResources = db.RecipeDetails.Where(x => x.RecipeId == selectedRecipe.Id).Select(x => x.Resource).AsObservableCollection();            
+        }
 
         private void OpenAddResourceToRecipeDialog(string obj)
         {
