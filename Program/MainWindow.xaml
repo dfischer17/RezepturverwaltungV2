@@ -15,7 +15,7 @@
         <TabControl>
             <TabItem Header="Rohstoffe">
                 <StackPanel DataContext="{Binding ResourceViewModel}">
-                    <DataGrid Name="resourceGrid" Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Resources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource}">
+                    <DataGrid IsReadOnly="True" Name="resourceGrid" Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Resources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                             <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
@@ -38,7 +38,7 @@
             <TabItem Header="Kunden">
                 <StackPanel DataContext="{Binding CustomerViewModel}">
 
-                    <DataGrid Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, AsyncState=True}" SelectedItem="{Binding SelectedCustomer}">
+                    <DataGrid IsReadOnly="True" Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, AsyncState=True}" SelectedItem="{Binding SelectedCustomer}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                             <DataGridTextColumn Binding="{Binding Lastname}" Header="Nachname"/>
@@ -63,7 +63,7 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0">
-                        <DataGrid Name="recipeGrid" Margin="0 0 0 20" AutoGenerateColumns="False"  SelectedItem="{Binding SelectedRecipe}" ItemsSource="{Binding Recipes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid IsReadOnly="True" Name="recipeGrid" Margin="0 0 0 20" AutoGenerateColumns="False"  SelectedItem="{Binding SelectedRecipe}" ItemsSource="{Binding Recipes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
@@ -82,7 +82,7 @@
                     </StackPanel>
                                        
                     <StackPanel Grid.Column="1">
-                        <DataGrid Name="recipeDetails" Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding RecipeResources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid IsReadOnly="True" Name="recipeDetails" Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding RecipeResources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
@@ -111,7 +111,7 @@
                     <ListView SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}" Grid.Row="0" Grid.Column="0">
                     </ListView>
                     <StackPanel Grid.Row="0" Grid.Column="1">
-                        <DataGrid Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding Orders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid IsReadOnly="True" Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding Orders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding OrderDate}" Header="Bestelldatum"/>
                                 <DataGridTextColumn Binding="{Binding DeliveryDate}" Header="Lieferdatum"/>
@@ -126,7 +126,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Grid.Column="1">
-                        <DataGrid Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}">
+                        <DataGrid IsReadOnly="True" Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
                                 <DataGridTextColumn Binding="{Binding Amount}" Header="Menge"/>
