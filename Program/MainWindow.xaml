@@ -27,7 +27,7 @@
                     </DataGrid>
 
                     <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
-                        <Button Content="Rohstoff hinzufügen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddResourceDialogCommand, Mode=OneWay}"/>
+                        <Button Content="Rohstoff erstellen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddResourceDialogCommand, Mode=OneWay}"/>
                         <Button Content="Rohstoff ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditResourceDialogCommand, Mode=OneWay}"/>
                         <Button Content="Rohstoff löschen" Background="Red" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"/>
                     </StackPanel>
@@ -49,9 +49,9 @@
                     </DataGrid>
 
                     <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
-                        <Button Content="Kunden hinzufügen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddCustomerDialogCommand, Mode=OneWay}"/>
-                        <Button Content="Kunden ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditCustomerDialogCommand, Mode=OneWay}"/>
-                        <Button Content="Kunden löschen" Background="Red" Command="{Binding DeleteSelectedCustomerCommand, Mode=OneWay}"/>
+                        <Button Content="Kunde erstellen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddCustomerDialogCommand, Mode=OneWay}"/>
+                        <Button Content="Kunde ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditCustomerDialogCommand, Mode=OneWay}"/>
+                        <Button Content="Kunde löschen" Background="Red" Command="{Binding DeleteSelectedCustomerCommand, Mode=OneWay}"/>
                     </StackPanel>
                 </StackPanel>         
             </TabItem>
@@ -75,14 +75,14 @@
                         </DataGrid>
 
                         <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
-                            <Button Content="Rezept hinzufügen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddRecipeDialogCommand, Mode=OneWay}"/>
+                            <Button Content="Rezept erstellen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddRecipeDialogCommand, Mode=OneWay}"/>
                             <Button Content="Rezept ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditRecipeDialogCommand, Mode=OneWay}"/>
                             <Button Content="Rezept löschen" Background="Red" Command="{Binding DeleteSelectedRecipeCommand, Mode=OneWay}"/>
                         </StackPanel>
                     </StackPanel>
                                        
                     <StackPanel Grid.Column="1">
-                        <DataGrid Name="recipeDetails" Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding RecipeResources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource}">
+                        <DataGrid Name="recipeDetails" Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding RecipeResources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
@@ -91,8 +91,8 @@
                             </DataGrid.Columns>
                         </DataGrid>
                         <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
-                            <Button Content="Neue Zutat hinzufügen" Margin="0 0 10 0" Command="{Binding OpenAddResourceToRecipeDialogCommand, Mode=OneWay}"></Button>
-                            <Button Content="Zutat löschen" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"></Button>
+                            <Button Content="Zutat hinzufügen" Margin="0 0 10 0" Command="{Binding OpenAddResourceToRecipeDialogCommand, Mode=OneWay}"></Button>
+                            <Button Content="Zutat entfernen" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"></Button>
                         </StackPanel>
                         
                     </StackPanel>
@@ -120,13 +120,13 @@
                         </DataGrid>
                         <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
                             <Button Command="{Binding AddOrderCommand}" Margin="0 0 10 0" Content="Bestellung hinzufügen"></Button>
-                            <Button Command="{Binding DeleteOrderCommand}" Content="Bestellung löschen"></Button>
+                            <Button Command="{Binding DeleteOrderCommand}" Content="Bestellung entfernen"></Button>
                         </StackPanel>
                         
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Grid.Column="1">
-                        <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Recipes}">
+                        <DataGrid Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
                                 <DataGridTextColumn Binding="{Binding Amount}" Header="Menge"/>
@@ -134,7 +134,10 @@
                                 <DataGridTextColumn Binding="{Binding Retailprice}" Header="Preis"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Content="Rezept zu Bestellung hinzufügen" Margin="0,20,0,0" Command="{Binding OpenAddRecipeToOrderDialogCommand}"></Button>
+                        <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
+                            <Button Content="Rezept hinzufügen" Margin="0 0 10 0"  Command="{Binding OpenAddRecipeToOrderDialogCommand}"></Button>
+                            <Button Content="Rezept entfernen" Command="{Binding DeleteSelectedRecipeCommand}"></Button>
+                        </StackPanel>
                     </StackPanel>
                 </Grid>
             </TabItem>

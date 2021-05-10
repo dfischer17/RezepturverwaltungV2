@@ -93,6 +93,19 @@ namespace Viemodel
             }
         }
 
+        private Recipe selectedRecipe;
+
+        public Recipe SelectedRecipe
+        {
+            get { return selectedRecipe; }
+            set
+            {
+                selectedRecipe = value;
+                RaisePropertyChangedEvent(nameof(SelectedRecipe));
+            }
+        }
+
+
         //Commands
         public ICommand AddOrderCommand => new RelayCommand<string>(
            AddOrder,
@@ -105,6 +118,10 @@ namespace Viemodel
         public ICommand OpenAddRecipeToOrderDialogCommand => new RelayCommand<string>(
            OpenAddRecipeToOrderDialog,
            x => SelectedOrder != null);
+
+        public ICommand DeleteSelectedRecipeCommand => new RelayCommand<string>(
+          DeleteSelectedRecipe,
+          x => SelectedRecipe != null);
 
         /*/Helper*/
         private void AddOrder(string obj)
@@ -135,6 +152,16 @@ namespace Viemodel
             db.SaveChanges();
             Orders = db.Orders.Where(x => x.CustomerId == SelectedCustomer.Id).AsObservableCollection();
             Recipes = new();
+        }
+
+        private void DeleteSelectedRecipe(string obj)
+        {
+            var recipe = SelectedRecipe as Recipe;
+
+            var deleteOrderDetail = db.OrderDetails.Single(x => x.RecipeId == recipe.Id);
+            db.OrderDetails.Remove(deleteOrderDetail);
+            db.SaveChanges();
+            Recipes = db.OrderDetails.Where(x => x.OrderId == SelectedOrder.Id).Select(x => x.Recipe).AsObservableCollection();
         }
 
         private void OpenAddRecipeToOrderDialog(String obj)

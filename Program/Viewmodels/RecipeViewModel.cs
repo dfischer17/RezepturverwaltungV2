@@ -177,11 +177,14 @@ namespace Viemodel
         }
 
         private void DeleteSelectedResource(string obj)
-        {
-            var deleteResource = db.Resources.Single(x => x.Id == SelectedResource.Id);
-            db.Resources.Remove(deleteResource);
+        {            
+            var deleteResource = SelectedResource;
+
+            var deleteRecipeDetail = db.RecipeDetails.Single(x => x.ResourceId == deleteResource.Id);
+            db.RecipeDetails.Remove(deleteRecipeDetail);
             db.SaveChanges();
-            RecipeResources = db.RecipeDetails.Where(x => x.RecipeId == selectedRecipe.Id).Select(x => x.Resource).AsObservableCollection();            
+
+            RecipeResources = db.RecipeDetails.Where(x => x.RecipeId == SelectedRecipe.Id).Select(x => x.Resource).AsObservableCollection();            
         }
 
         private void OpenAddResourceToRecipeDialog(string obj)
