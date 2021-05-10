@@ -1,7 +1,9 @@
 ﻿using Database;
 using Database.Entities;
+using Database.Utility;
 using MVVM.Tools;
 using Program.Dialogs;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Input;
@@ -144,6 +146,6 @@ namespace Viemodel
             db.Resources.Remove(deleteResource);
             db.SaveChanges();
             Resources = db.Resources.AsObservableCollection();
-        }
+        }        
     }
 }

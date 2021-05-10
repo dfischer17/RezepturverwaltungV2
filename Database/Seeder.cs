@@ -20,7 +20,7 @@ namespace Database
             {
                 Id = 1,
                 Name = "Aloe Vera 10-fach",
-                Amount = 10,
+                UnitsInStock = 10,
                 Netprice = 1.20,
                 Taxrate = 0.2,
                 Unit = "ml",
@@ -29,7 +29,7 @@ namespace Database
             {
                 Id = 2,
                 Name = "Aloe Vera Gel",
-                Amount = 15,
+                UnitsInStock = 15,
                 Netprice = 4.8,
                 Taxrate = 0.2,
                 Unit = "ml",
@@ -38,7 +38,7 @@ namespace Database
             {
                 Id = 3,
                 Name = "Alpha-Bisabolol",
-                Amount = 6,
+                UnitsInStock = 6,
                 Netprice = 4.8,
                 Taxrate = 0.2,
                 Unit = "ml",
@@ -47,7 +47,7 @@ namespace Database
             {
                 Id = 4,
                 Name = "Bienenwachs weiß kbA",
-                Amount = 9,
+                UnitsInStock = 9,
                 Netprice = 7.0,
                 Taxrate = 0.15,
                 Unit = "g",

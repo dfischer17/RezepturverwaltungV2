@@ -1,5 +1,6 @@
 ﻿using Database;
 using Database.Entities;
+using Database.Utility;
 using MVVM.Tools;
 using Program.Dialogs;
 using System;
@@ -88,7 +89,7 @@ namespace Viemodel
 
                 if (selectedRecipe != null)
                 {
-                    RecipeResources = db.RecipeDetails.Where(x => x.RecipeId == selectedRecipe.Id).Select(x => x.Resource).AsObservableCollection();
+                    RecipeResources = ToDatagridResources(db.RecipeDetails.Where(x => x.RecipeId == selectedRecipe.Id).Select(x => x.Resource).AsObservableCollection());
                     RaisePropertyChangedEvent(nameof(selectedRecipe));
                 }                
             }
@@ -108,9 +109,9 @@ namespace Viemodel
 
 
 
-        private ObservableCollection<Resource> recipeResources;
+        private ObservableCollection<DatagridResource> recipeResources;
 
-        public ObservableCollection<Resource> RecipeResources
+        public ObservableCollection<DatagridResource> RecipeResources
         {
             get => recipeResources;
             set
@@ -184,7 +185,7 @@ namespace Viemodel
             db.RecipeDetails.Remove(deleteRecipeDetail);
             db.SaveChanges();
 
-            RecipeResources = db.RecipeDetails.Where(x => x.RecipeId == SelectedRecipe.Id).Select(x => x.Resource).AsObservableCollection();            
+            RecipeResources = ToDatagridResources(db.RecipeDetails.Where(x => x.RecipeId == SelectedRecipe.Id).Select(x => x.Resource).AsObservableCollection());            
         }
 
         private void OpenAddResourceToRecipeDialog(string obj)
@@ -194,8 +195,37 @@ namespace Viemodel
             {
                 addResourceToRecipeDialog.AddResourceToRecipe();
                 Recipes = db.Recipes.AsObservableCollection();
-                RecipeResources = db.RecipeDetails.Where(x => x.RecipeId == SelectedRecipe.Id).Select(x => x.Resource).AsObservableCollection();
+                RecipeResources = ToDatagridResources(db.RecipeDetails.Where(x => x.RecipeId == SelectedRecipe.Id).Select(x => x.Resource).AsObservableCollection());
             }
+        }
+
+        // Utility
+        private ObservableCollection<DatagridResource> ToDatagridResources(ObservableCollection<Resource> resources)
+        {            
+            ObservableCollection<DatagridResource> datagridResources = new();
+
+            foreach (var resource in resources)
+            {
+                var recipeDetails = db.RecipeDetails.Where(x => x.RecipeId == selectedRecipe.Id && x.ResourceId == resource.Id).ToList();
+                int resourceQuantity = 0;
+
+                foreach (var recipeDetail in recipeDetails)
+                {
+                    resourceQuantity += recipeDetail.Quantity;
+                }
+
+                datagridResources.Add(new DatagridResource
+                {
+                    Id = resource.Id,
+                    Name = resource.Name,
+                    UnitsInOrder = resourceQuantity,
+                    Unit = resource.Unit,
+                    Netprice = resource.Netprice,
+                    Taxrate = resource.Taxrate,
+                });
+            }
+
+            return datagridResources;
         }
     }
 }
