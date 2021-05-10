@@ -98,6 +98,10 @@ namespace Viemodel
            AddOrder,
            x => SelectedCustomer != null);
 
+        public ICommand DeleteOrderCommand => new RelayCommand<string>(
+           DeleteSelectedOrder,
+           x => SelectedCustomer != null);
+
         public ICommand OpenAddRecipeToOrderDialogCommand => new RelayCommand<string>(
            OpenAddRecipeToOrderDialog,
            x => SelectedOrder != null);
@@ -122,6 +126,15 @@ namespace Viemodel
             
             //OrderDetail
             //Implement
+        }
+
+        private void DeleteSelectedOrder(string obj)
+        { 
+            var deleteOrder = db.Orders.Single(x => x.Id == SelectedOrder.Id);
+            db.Orders.Remove(deleteOrder);
+            db.SaveChanges();
+            Orders = db.Orders.Where(x => x.CustomerId == SelectedCustomer.Id).AsObservableCollection();
+            Recipes = new();
         }
 
         private void OpenAddRecipeToOrderDialog(String obj)

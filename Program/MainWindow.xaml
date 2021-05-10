@@ -111,15 +111,18 @@
                     <ListView SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}" Grid.Row="0" Grid.Column="0">
                     </ListView>
                     <StackPanel Grid.Row="0" Grid.Column="1">
-                        <DataGrid SelectedItem="{Binding SelectedOrder}" AutoGenerateColumns="False" ItemsSource="{Binding Orders}">
+                        <DataGrid Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding Orders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding OrderDate}" Header="Bestelldatum"/>
                                 <DataGridTextColumn Binding="{Binding DeliveryDate}" Header="Lieferdatum"/>
                                 <DataGridTextColumn Binding="{Binding Status}" Header="Status"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <Button Command="{Binding AddOrderCommand}" Margin="0,20,0,0" Content="Bestellung hinzufügen">
-                        </Button>
+                        <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
+                            <Button Command="{Binding AddOrderCommand}" Margin="0 0 10 0" Content="Bestellung hinzufügen"></Button>
+                            <Button Command="{Binding DeleteOrderCommand}" Content="Bestellung löschen"></Button>
+                        </StackPanel>
+                        
                     </StackPanel>
 
                     <StackPanel Grid.Row="1" Grid.Column="1">
