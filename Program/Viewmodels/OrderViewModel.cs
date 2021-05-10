@@ -111,6 +111,10 @@ namespace Viemodel
            AddOrder,
            x => SelectedCustomer != null);
 
+        public ICommand EditOrderCommand => new RelayCommand<string>(
+           EditOrder,
+           x => SelectedOrder != null);
+
         public ICommand DeleteOrderCommand => new RelayCommand<string>(
            DeleteSelectedOrder,
            x => SelectedCustomer != null && SelectedOrder != null);
@@ -140,9 +144,16 @@ namespace Viemodel
                 db.SaveChanges();
                 Orders = db.Orders.Where(x => x.CustomerId == SelectedCustomer.Id).AsObservableCollection();
             }
-            
-            //OrderDetail
-            //Implement
+        }
+
+        private void EditOrder(String obj)
+        {
+            var editOrderDialog = new EditOrderDialog(db, selectedOrder);
+            if (editOrderDialog.ShowDialog() == true)
+            {
+                editOrderDialog.EditOrder();
+                Orders = db.Orders.Where(x => x.CustomerId == SelectedCustomer.Id).AsObservableCollection();
+            }
         }
 
         private void DeleteSelectedOrder(string obj)

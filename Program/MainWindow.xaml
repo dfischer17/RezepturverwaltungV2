@@ -120,6 +120,7 @@
                         </DataGrid>
                         <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
                             <Button Command="{Binding AddOrderCommand}" Margin="0 0 10 0" Content="Bestellung hinzufügen"></Button>
+                            <Button Command="{Binding EditOrderCommand}" Margin="0 0 10 0" Content="Bestellung ändern"></Button>
                             <Button Command="{Binding DeleteOrderCommand}" Content="Bestellung entfernen"></Button>
                         </StackPanel>
                         
