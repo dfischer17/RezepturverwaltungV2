@@ -15,30 +15,29 @@
         <TabControl>
             <TabItem Header="Rohstoffe">
                 <StackPanel DataContext="{Binding ResourceViewModel}">
-                    <DataGrid Name="resourceGrid" Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Resources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource}">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
-                            <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
-                            <DataGridTextColumn Binding="{Binding UnitsinStock}" Header="Lagerbestand"/>
-                            <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
-                            <DataGridTextColumn Binding="{Binding Netprice}" Header="Nettopreis"/>
-                            <DataGridTextColumn Binding="{Binding Taxrate}" Header="Steuersatz"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <DataGrid MinHeight="590" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" Name="resourceGrid" Margin="0,0,0,10" AutoGenerateColumns="False" ItemsSource="{Binding Resources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
+                                <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
+                                <DataGridTextColumn Binding="{Binding UnitsinStock}" Header="Lagerbestand"/>
+                                <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
+                                <DataGridTextColumn Binding="{Binding Netprice}" Header="Nettopreis"/>
+                                <DataGridTextColumn Binding="{Binding Taxrate}" Header="Steuersatz"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
 
-                    <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
-                        <Button Content="Rohstoff hinzufügen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddResourceDialogCommand, Mode=OneWay}"/>
-                        <Button Content="Rohstoff ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditResourceDialogCommand, Mode=OneWay}"/>
-                        <Button Content="Rohstoff löschen" Background="Red" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"/>
-                    </StackPanel>
-                    
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="15 0 0 0">
+                            <Button Content="Rohstoff hinzufügen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddResourceDialogCommand, Mode=OneWay}"/>
+                            <Button Content="Rohstoff ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditResourceDialogCommand, Mode=OneWay}"/>
+                            <Button Content="Rohstoff löschen" Background="Red" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"/>
+                        </StackPanel>
                 </StackPanel>
             </TabItem>
 
             <TabItem Header="Kunden">
                 <StackPanel DataContext="{Binding CustomerViewModel}">
 
-                    <DataGrid Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, AsyncState=True}" SelectedItem="{Binding SelectedCustomer}">
+                    <DataGrid Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, AsyncState=True}" SelectedItem="{Binding SelectedCustomer}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                             <DataGridTextColumn Binding="{Binding Lastname}" Header="Nachname"/>
@@ -53,7 +52,7 @@
                         <Button Content="Kunden ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditCustomerDialogCommand, Mode=OneWay}"/>
                         <Button Content="Kunden löschen" Background="Red" Command="{Binding DeleteSelectedCustomerCommand, Mode=OneWay}"/>
                     </StackPanel>
-                </StackPanel>         
+                </StackPanel>
             </TabItem>
             <TabItem Header="Rezepte">
                 <Grid DataContext="{Binding RecipeViewModel}">
@@ -131,7 +130,7 @@
                         <Button Command="{Binding AddOrderCommand}" Margin="0,20,0,0" Content="Bestellung hinzufügen">
                         </Button>
                     </StackPanel>
-                    
+
                     <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding Recipes}" Grid.Row="1" Grid.Column="1">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
@@ -139,7 +138,7 @@
                             <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
                             <DataGridTextColumn Binding="{Binding Retailprice}" Header="Preis"/>
                         </DataGrid.Columns>
-                    </DataGrid>                    
+                    </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -1,6 +1,7 @@
 ﻿using Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -213,5 +214,25 @@ namespace Database
                 });
             }
         }
+        public static void SeedRecipes(this ModelBuilder modelBuilder, string filename)
+        {
+            //Seed Recipes
+            var lines = File.ReadAllLines(filename);
+            foreach(var line in lines)
+            {
+                var values = line.Split(";");
+
+                modelBuilder.Entity<Recipe>().HasData(new Recipe
+                {
+                    Id = Int32.Parse(values[0]),
+                    Name = values[1],
+                    Amount = Int32.Parse(values[2]),
+                    Unit = values[3],
+                    Costprice = 0,
+                    Retailprice = 0,
+                });
+            }
+        }
+       
     }
 }

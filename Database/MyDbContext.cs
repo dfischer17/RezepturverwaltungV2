@@ -31,11 +31,12 @@ namespace Database
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //Testdaten
+            //Seed Testdaten
             //modelBuilder.TestSeed();
 
-            //Nur Rohstoffe!
+            //Seed
             modelBuilder.SeedResources("Rohstoffe.CSV");
+            modelBuilder.SeedRecipes("Rezepte.csv");
         }
     }
 }
