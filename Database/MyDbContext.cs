@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Database
 {
-    public class MyDbContext : DbContext
+    public partial class MyDbContext : DbContext
     {
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
         public MyDbContext() { }
@@ -35,8 +35,8 @@ namespace Database
             //modelBuilder.TestSeed();
 
             //Seed
-            modelBuilder.SeedResources("Rohstoffe.CSV");
-            modelBuilder.SeedRecipes("Rezepte.csv");
+            modelBuilder.Seed();
         }
+
     }
 }
