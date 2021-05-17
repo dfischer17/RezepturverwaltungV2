@@ -40,6 +40,7 @@ namespace Program.Dialogs
                 RecipeId = selectedRecipe.Id,
                 ResourceId = selectedResource.Id,
                 Quantity = int.Parse(amountTxtbox.Text),
+                
             };
             db.RecipeDetails.Add(recipeDetail);
             db.SaveChanges();

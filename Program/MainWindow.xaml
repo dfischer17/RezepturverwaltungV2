@@ -21,8 +21,8 @@
                             <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
                             <DataGridTextColumn Binding="{Binding UnitsInStock}" Header="Lagernd"/>
                             <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
-                            <DataGridTextColumn Binding="{Binding Netprice}" Header="Nettopreis"/>
-                            <DataGridTextColumn Binding="{Binding Taxrate}" Header="Steuersatz"/>
+                            <DataGridTextColumn Binding="{Binding NetpriceOutputFormat}"  Header="Nettopreis"/>
+                            <DataGridTextColumn Binding="{Binding TaxrateOutputFormat}" Header="Steuersatz"/>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -69,8 +69,8 @@
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
                                 <DataGridTextColumn Binding="{Binding Amount}" Header="Menge/Rezept"/>
                                 <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
-                                <DataGridTextColumn Binding="{Binding Costprice}" Header="Produktionspreis"/>
-                                <DataGridTextColumn Binding="{Binding Retailprice}" Header="Verkaufspreis"/>
+                                <DataGridTextColumn Binding="{Binding CostpriceOutputFormat}" Header="Produktionspreis"/>
+                                <DataGridTextColumn Binding="{Binding RetailpriceOutputFormat}" Header="Verkaufspreis"/>
                             </DataGrid.Columns>
                         </DataGrid>
 
@@ -127,7 +127,7 @@
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
                                 <DataGridTextColumn Binding="{Binding Amount}" Header="Menge"/>
                                 <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
-                                <DataGridTextColumn Binding="{Binding Retailprice}" Header="Preis"/>
+                                <DataGridTextColumn Binding="{Binding RetailpriceOutputFormat}" Header="Preis"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <StackPanel Orientation="Horizontal" Margin="15 0 0 0">

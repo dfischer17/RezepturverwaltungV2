@@ -16,5 +16,20 @@ namespace Database.Entities
         public double Retailprice { get; set; }
         public List<OrderDetail> OrderDetails { get; set; }
         public List<RecipeDetail> RecipeDetails{ get; set; }
+
+        private string costpriceOutputFormat;       
+
+        public string CostpriceOutputFormat
+        {
+            get { return $"{Costprice}€"; }
+            set { costpriceOutputFormat = value; }
+        }
+        private string retailpriceOutputFormat;
+
+        public string RetailpriceOutputFormat
+        {
+            get { return $"{Retailprice}€"; }
+            set { retailpriceOutputFormat = value; }
+        }
     }
 }

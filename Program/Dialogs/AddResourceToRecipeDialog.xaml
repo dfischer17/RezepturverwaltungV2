@@ -8,11 +8,11 @@
         Title="Zutat hinzufügen" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel>
-            <DataGrid Name="resourceGrid" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding Resources}" SelectedItem="{Binding SelectedResource}">
+            <DataGrid MaxHeight="500" Name="resourceGrid" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding Resources}" SelectedItem="{Binding SelectedResource}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                     <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
-                    <DataGridTextColumn Binding="{Binding Amount}" Header="Menge"/>
+                    <DataGridTextColumn Binding="{Binding UnitsInStock}" Header="Menge"/>
                     <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
                 </DataGrid.Columns>
             </DataGrid>

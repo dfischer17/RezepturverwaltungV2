@@ -12,6 +12,22 @@ namespace Database.Entities
         public double Taxrate { get; set; }
         public List<RecipeDetail> RecipeDetails { get; set; }
 
+        private string netpriceOutputFormat;
+
+        public string NetpriceOutputFormat
+        {
+            get { return $"{Netprice}€"; }
+            set { netpriceOutputFormat = value; }
+        }
+        private string taxrateOutputFormat;
+
+        public string TaxrateOutputFormat
+        {
+            get { return $"{Taxrate}%"; }
+            set { taxrateOutputFormat = value; }
+        }
+
+
         private double CalculateGrossPrice()
         {
             return Netprice * (Taxrate + 1);
