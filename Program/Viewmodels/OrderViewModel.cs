@@ -75,7 +75,7 @@ namespace Viemodel
                 if (selectedOrder != null)
                 {
                     Recipes = db.OrderDetails.Where(x => x.OrderId == SelectedOrder.Id).Select(x => x.Recipe).AsObservableCollection();
-
+                    SelectedOrder.OrderDetails = db.OrderDetails.Where(x => x.OrderId == SelectedOrder.Id).ToList();
                 }
 
                 RaisePropertyChangedEvent(nameof(SelectedOrder));
@@ -169,7 +169,7 @@ namespace Viemodel
         {
             var recipe = SelectedRecipe as Recipe;
 
-            var deleteOrderDetail = db.OrderDetails.Single(x => x.RecipeId == recipe.Id);
+            var deleteOrderDetail = SelectedOrder.OrderDetails.Single(x => x.RecipeId == recipe.Id);
             db.OrderDetails.Remove(deleteOrderDetail);
             db.SaveChanges();
             Recipes = db.OrderDetails.Where(x => x.OrderId == SelectedOrder.Id).Select(x => x.Recipe).AsObservableCollection();
