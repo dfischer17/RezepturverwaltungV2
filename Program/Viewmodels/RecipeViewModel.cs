@@ -96,9 +96,9 @@ namespace Viemodel
             }
         }
 
-        private Resource selectedResource;
+        private DatagridResource selectedResource;
 
-        public Resource SelectedResource
+        public DatagridResource SelectedResource
         {
             get { return selectedResource; }
             set
@@ -140,7 +140,7 @@ namespace Viemodel
 
         public ICommand DeleteSelectedRecipeCommand => new RelayCommand<string>(
             DeleteSelecedRecipe,
-            x => SelectedRecipe != null
+            x => SelectedRecipe != null 
             );
 
         public ICommand DeleteSelectedResourceCommand => new RelayCommand<string>(
@@ -180,9 +180,9 @@ namespace Viemodel
 
         private void DeleteSelectedResource(string obj)
         {            
-            var deleteResource = SelectedResource;
+            var deleteResource =  SelectedResource;
 
-            var deleteRecipeDetail = db.RecipeDetails.Single(x => x.ResourceId == deleteResource.Id);
+            var deleteRecipeDetail = SelectedRecipe.RecipeDetails.Single(x => x.ResourceId == deleteResource.Id);
             db.RecipeDetails.Remove(deleteRecipeDetail);
             db.SaveChanges();
 
