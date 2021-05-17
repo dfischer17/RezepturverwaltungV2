@@ -53,7 +53,7 @@
                         <Button Content="Kunde ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditCustomerDialogCommand, Mode=OneWay}"/>
                         <Button Content="Kunde löschen" Background="Red" Command="{Binding DeleteSelectedCustomerCommand, Mode=OneWay}"/>
                     </StackPanel>
-                </StackPanel>         
+                </StackPanel>
             </TabItem>
             <TabItem Header="Rezepte">
                 <Grid DataContext="{Binding RecipeViewModel}">

@@ -25,6 +25,9 @@ namespace Program
         public MainWindow()
         {
             InitializeComponent();
+            
+            //Seed Data into Database
+            //DbSeederExtension.Seed();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -45,6 +48,7 @@ namespace Program
             {
                 Title = ex.Message;
             }
+            
         }
     }
 }

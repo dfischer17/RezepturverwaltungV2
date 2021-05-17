@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Database
 {
-    public class MyDbContext : DbContext
+    public partial class MyDbContext : DbContext
     {
         public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
         public MyDbContext() { }
@@ -24,14 +24,19 @@ namespace Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var connectionString = @"server=(LocalDB)\mssqllocaldb;attachdbfilename=C:\mytemp\Recipe.mdf;database=Recipes;integrated security=True";
-                //var connectionString = @"server=(LocalDB)\mssqllocaldb;attachdbfilename=C:\Users\pefr2\OneDrive\Desktop\Databases\Recipe.mdf;database=Recipes;integrated security=True";
+                //var connectionString = @"server=(LocalDB)\mssqllocaldb;attachdbfilename=C:\mytemp\Recipe.mdf;database=Recipes;integrated security=True";
+                var connectionString = @"server=(LocalDB)\mssqllocaldb;attachdbfilename=C:\Users\pefr2\OneDrive\Desktop\Databases\Recipe.mdf;database=Recipes;integrated security=True";
                 optionsBuilder.UseSqlServer(connectionString);
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.TestSeed();
+            //Seed Testdaten
+            //modelBuilder.TestSeed();
+
+            //Seed
+            modelBuilder.Seed();
         }
+
     }
 }
