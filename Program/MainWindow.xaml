@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Program" 
         xmlns:viewmodel.Viewmodels="clr-namespace:Viemodel"
         mc:Ignorable="d"
-        Title="Rezepturverwaltung" Height="700" Width="1000"
+        Title="Rezepturverwaltung" Height="700" Width="1200"
         Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
     <Window.DataContext>
         <viewmodel.Viewmodels:MainViewModel></viewmodel.Viewmodels:MainViewModel>
@@ -15,7 +15,7 @@
         <TabControl>
             <TabItem Header="Rohstoffe">
                 <StackPanel DataContext="{Binding ResourceViewModel}">
-                    <DataGrid IsReadOnly="True" Name="resourceGrid" Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Resources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource}">
+                    <DataGrid MaxHeight="590" IsReadOnly="True" Name="resourceGrid" Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Resources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                             <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
@@ -63,7 +63,7 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Grid.Column="0">
-                        <DataGrid IsReadOnly="True" AutoGenerateColumns="False" Name="recipeGrid" Margin="0 0 0 20" SelectedItem="{Binding SelectedRecipe}" ItemsSource="{Binding Recipes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <DataGrid MaxHeight="590" IsReadOnly="True" AutoGenerateColumns="False" Name="recipeGrid" Margin="0 0 0 20" SelectedItem="{Binding SelectedRecipe}" ItemsSource="{Binding Recipes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>

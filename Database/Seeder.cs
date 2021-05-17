@@ -206,7 +206,7 @@ namespace Database
                 {
                     Id = Int32.Parse(values[0]),
                     Name = values[1],
-                    UnitsinStock = Convert.ToDouble(values[2].Trim()),
+                    UnitsInStock = Convert.ToDouble(values[2].Trim()),
                     Netprice = Convert.ToDouble(values[3].Trim()),
                     Taxrate = Convert.ToDouble(values[4].Trim()),
                     Unit = values[5].Trim(),

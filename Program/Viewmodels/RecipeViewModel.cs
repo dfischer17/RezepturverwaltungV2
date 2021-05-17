@@ -6,6 +6,7 @@ using Program.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -103,7 +104,7 @@ namespace Viemodel
             set
             {
                 selectedResource = value;
-                RaisePropertyChangedEvent(nameof(SelectedResource));
+                RaisePropertyChangedEvent(nameof(SelectedResource));            
             }
         }
 
@@ -207,7 +208,7 @@ namespace Viemodel
             foreach (var resource in resources)
             {
                 var recipeDetails = db.RecipeDetails.Where(x => x.RecipeId == selectedRecipe.Id && x.ResourceId == resource.Id).ToList();
-                int resourceQuantity = 0;
+                double resourceQuantity = 0;
 
                 foreach (var recipeDetail in recipeDetails)
                 {
