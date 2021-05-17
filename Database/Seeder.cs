@@ -227,8 +227,8 @@ namespace Database
                     Name = values[1],
                     Amount = Int32.Parse(values[2]),
                     Unit = values[3],
-                    Costprice = 0,
-                    Retailprice = 0,
+                    Costprice = 5,
+                    Retailprice = 10,
                 });
             }
         }

@@ -126,6 +126,9 @@ namespace Viemodel
         public ICommand DeleteSelectedRecipeCommand => new RelayCommand<string>(
           DeleteSelectedRecipe,
           x => SelectedRecipe != null);
+        public ICommand OpenBillDialogCommand => new RelayCommand<string>(
+          OpenBillDialog,
+          x => SelectedOrder != null);
 
         /*/Helper*/
         private void AddOrder(string obj)
@@ -183,6 +186,11 @@ namespace Viemodel
                 addRecipeToOrderDialog.AddRecipeToOrder();
                 Recipes = db.OrderDetails.Where(x => x.OrderId == SelectedOrder.Id).Select(x => x.Recipe).AsObservableCollection();
             }
+        }
+        private void OpenBillDialog(string obj)
+        {
+            BillDialog billDialog = new BillDialog(db, SelectedOrder);
+            billDialog.ShowDialog();
         }
     }
 }

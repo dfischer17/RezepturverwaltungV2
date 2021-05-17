@@ -116,7 +116,9 @@
                         <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
                             <Button Command="{Binding AddOrderCommand}" Margin="0 0 10 0" Content="Bestellung hinzufügen"></Button>
                             <Button Command="{Binding EditOrderCommand}" Margin="0 0 10 0" Content="Bestellung ändern"></Button>
-                            <Button Command="{Binding DeleteOrderCommand}" Content="Bestellung entfernen"></Button>
+                            <Button Command="{Binding DeleteOrderCommand}"  Margin="0 0 10 0" Content="Bestellung entfernen"></Button>
+                            <Button Command="{Binding OpenBillDialogCommand, Mode=OneWay}" Content="Rechnung anzeigen"></Button>
+
                         </StackPanel>
                         
                     </StackPanel>
@@ -133,6 +135,7 @@
                         <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
                             <Button Content="Rezept hinzufügen" Margin="0 0 10 0"  Command="{Binding OpenAddRecipeToOrderDialogCommand}"></Button>
                             <Button Content="Rezept entfernen" Command="{Binding DeleteSelectedRecipeCommand}"></Button>
+
                         </StackPanel>
                     </StackPanel>
                 </Grid>
