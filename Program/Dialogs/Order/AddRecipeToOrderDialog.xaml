@@ -8,7 +8,7 @@
         Title="Rezept zu Bestellung  hinzufügen" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Grid>
         <StackPanel>
-            <DataGrid Name="availableRecipeGrid" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
+            <DataGrid MaxHeight="500"  IsReadOnly="True" Name="availableRecipeGrid" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                     <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
