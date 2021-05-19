@@ -227,7 +227,7 @@ namespace Database
                     Name = values[1],
                     Amount = Int32.Parse(values[2]),
                     Unit = values[3],
-                    Costprice = 5,
+                    Costprice = 0,
                     Retailprice = 10,
                 });
             }
@@ -257,7 +257,10 @@ namespace Database
                     }
                 }
             }
+
+
         }
+
         public static void SeedCustomers(this ModelBuilder modelBuilder)
         {
             //Seed Customers

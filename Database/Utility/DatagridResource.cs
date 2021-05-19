@@ -13,6 +13,21 @@ namespace Database.Utility
         public double UnitsInOrder { get; set; }
         public string Unit { get; set; }
         public double Netprice { get; set; }
-        public double Taxrate { get; set; }        
+        public double Taxrate { get; set; }
+        private string netpriceOutputFormat;
+
+        public string NetpriceOutputFormat
+        {
+            get { return $"{Netprice}€"; }
+            set { netpriceOutputFormat = value; }
+        }
+        private string taxrateOutputFormat;
+
+        public string TaxrateOutputFormat
+        {
+            get { return $"{Taxrate}%"; }
+            set { taxrateOutputFormat = value; }
+        }
+
     }
 }

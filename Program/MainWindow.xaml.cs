@@ -26,8 +26,6 @@ namespace Program
         {
             InitializeComponent();
             
-            //Seed Data into Database
-            //DbSeederExtension.Seed();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -35,13 +33,14 @@ namespace Program
             try
             {
                 var db = new MyDbContext();
-                
+
                 db.Database.EnsureDeleted();
                 db.Database.EnsureCreated();
                 
                 var mainViewModel = new MainViewModel(db);
                 this.DataContext = mainViewModel;
 
+                CalcCostprice(db);
                 //db.Dispose();
             }
             catch (Exception ex)
@@ -49,6 +48,21 @@ namespace Program
                 Title = ex.Message;
             }
             
+        }
+        public void CalcCostprice(MyDbContext db)
+        {
+            foreach(var recipe in db.Recipes.ToList())
+            {
+                var costprice = 0.0;
+                var currRecipeDetails = db.RecipeDetails.Where(x => x.RecipeId == recipe.Id).ToList();
+                foreach(var recipeDetail in currRecipeDetails)
+                {
+                    var resource = recipeDetail.Resource;
+                    costprice += resource.Netprice;
+                }
+                recipe.Costprice = Math.Round(costprice,2);
+                db.SaveChanges();
+            }
         }
     }
 }

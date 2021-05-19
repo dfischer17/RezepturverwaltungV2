@@ -36,6 +36,7 @@ namespace Database
 
             //Seed
             modelBuilder.Seed();
+            
         }
 
     }

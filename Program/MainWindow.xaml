@@ -82,8 +82,15 @@
                     </StackPanel>
                                        
                     <StackPanel Grid.Column="1">
-                        <DataGrid IsReadOnly="True" Name="recipeDetails" Margin="0 0 0 10" ItemsSource="{Binding RecipeResources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-    
+                        <DataGrid MaxHeight="590" AutoGenerateColumns="False" IsReadOnly="True" Name="recipeDetails" Margin="0 0 0 10" ItemsSource="{Binding RecipeResources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
+                                <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
+                                <DataGridTextColumn Binding="{Binding UnitsInOrder}" Header="Lagernd"/>
+                                <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
+                                <DataGridTextColumn Binding="{Binding NetpriceOutputFormat}" Header="Nettopreis"/>
+                                <DataGridTextColumn Binding="{Binding TaxrateOutputFormat}" Header="Steuersatz" />
+                            </DataGrid.Columns>
                         </DataGrid>
                         <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
                             <Button Content="Zutat hinzufügen" Margin="0 0 10 0" Command="{Binding OpenAddResourceToRecipeDialogCommand, Mode=OneWay}"></Button>
