@@ -1,0 +1,20 @@
+﻿<Window x:Class="Program.Dialogs.Order.MissingResourcesDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Program.Dialogs.Order"
+        mc:Ignorable="d"
+        Title="Fehlende Rohstoffe" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <StackPanel>
+            <DataGrid Name="datagridResources" IsReadOnly="True" >
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                <Button Content="Rohstoffe bestellen" x:Name="btnReorderResources" Margin="2,0,5,2" ></Button>
+                <Button HorizontalAlignment="Right" Content="Schließen" Click="Button_Click" Margin="5,0,2,2" ></Button>
+            </StackPanel>
+        </StackPanel>
+        
+    </Grid>
+</Window>

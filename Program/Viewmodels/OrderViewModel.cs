@@ -105,7 +105,7 @@ namespace Viemodel
                 RaisePropertyChangedEvent(nameof(SelectedRecipe));
             }
         }
-        private Dictionary<Resource,double> missingResources;
+        private Dictionary<Resource,double> missingResources = new ();
                 
         public Dictionary<Resource,double> MissingResources
         {
@@ -149,7 +149,7 @@ namespace Viemodel
 
         public ICommand CompleteOrderCommand => new RelayCommand<string>(
             CompleteOrder,
-            x => MissingResources.Count == 0);
+            x => MissingResources.Count == 0 && SelectedOrder != null);
 
         private static Dictionary<Resource, double> CalcMissingResources(ObservableCollection<Recipe> recipes)
         {
@@ -159,14 +159,14 @@ namespace Viemodel
             {
                 foreach(var resource in recipe.RecipeDetails.ToList())
                 {
-                    double amountToReorder = Math.Abs(resource.Resource.UnitsInStock - resource.Quantity);
+                    double amountToReorder = resource.Resource.UnitsInStock - resource.Quantity;
                     if (amountToReorder < 0 && !resources.ContainsKey(resource.Resource)) // Zu wenig Rohstoff vorhanden
                     {
-                        resources.Add(resource.Resource, amountToReorder);
+                        resources.Add(resource.Resource, Math.Abs(amountToReorder));
                     }
                     else if (amountToReorder < 0 && resources.ContainsKey(resource.Resource)) // Rohstoff schon bei fehlenden Rohstoffen
                     {
-                        resources[resource.Resource] += amountToReorder; 
+                        resources[resource.Resource] += Math.Abs(amountToReorder); 
                     }
                 }
             }
@@ -209,6 +209,7 @@ namespace Viemodel
             db.SaveChanges();
             Orders = db.Orders.Where(x => x.CustomerId == SelectedCustomer.Id).AsObservableCollection();
             Recipes = new();
+            MissingResources = new();
         }
 
         private void DeleteSelectedRecipe(string obj)
@@ -233,10 +234,12 @@ namespace Viemodel
         private void CompleteOrder(string obj)
         {
             throw new NotImplementedException();
+            //Rohstoffe
         }
         private void ReorderMissingResources(string obj)
         {
-            throw new NotImplementedException();
+            var resourcesDialog = new MissingResourcesDialog(db, MissingResources);
+            resourcesDialog.ShowDialog();
         }
         private void OpenBillDialog(string obj)
         {
