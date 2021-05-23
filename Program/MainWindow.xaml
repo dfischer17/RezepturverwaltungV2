@@ -141,8 +141,9 @@
                         </DataGrid>
                         <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
                             <Button Content="Rezept hinzufügen" Margin="0 0 10 0"  Command="{Binding OpenAddRecipeToOrderDialogCommand}"></Button>
-                            <Button Content="Rezept entfernen" Command="{Binding DeleteSelectedRecipeCommand}"></Button>
-
+                            <Button Content="Rezept entfernen" Margin="0,0,10,0" Command="{Binding DeleteSelectedRecipeCommand}"></Button>
+                            <Button Content="Bestellung abschließen" Margin="0,0,10,0" ></Button>
+                            <Button Content="Fehlende Rohstoffe"></Button>
                         </StackPanel>
                     </StackPanel>
                 </Grid>

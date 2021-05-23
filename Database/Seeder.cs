@@ -194,7 +194,8 @@ namespace Database
         public static void SeedResources(this ModelBuilder modelBuilder, string filename)
         {
             //Seed Resources
-            var lines = File.ReadAllLines(filename);
+            var encoding = Encoding.UTF8;
+            var lines = File.ReadAllLines(filename, encoding);
             foreach (var line in lines)
             {
                 var values = line.Split(";");
@@ -257,8 +258,6 @@ namespace Database
                     }
                 }
             }
-
-
         }
 
         public static void SeedCustomers(this ModelBuilder modelBuilder)

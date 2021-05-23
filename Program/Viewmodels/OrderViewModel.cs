@@ -76,6 +76,7 @@ namespace Viemodel
                 {
                     Recipes = db.OrderDetails.Where(x => x.OrderId == SelectedOrder.Id).Select(x => x.Recipe).AsObservableCollection();
                     SelectedOrder.OrderDetails = db.OrderDetails.Where(x => x.OrderId == SelectedOrder.Id).ToList();
+                    MissingResources = CalcMissingResources(Recipes);
                 }
 
                 RaisePropertyChangedEvent(nameof(SelectedOrder));
@@ -104,6 +105,17 @@ namespace Viemodel
                 RaisePropertyChangedEvent(nameof(SelectedRecipe));
             }
         }
+        private Dictionary<Resource,double> missingResources;
+                
+        public Dictionary<Resource,double> MissingResources
+        {
+            get => missingResources; 
+            set 
+            {
+                missingResources = value;
+                RaisePropertyChangedEvent(nameof(MissingResources));
+            }
+        }
 
 
         //Commands
@@ -126,9 +138,40 @@ namespace Viemodel
         public ICommand DeleteSelectedRecipeCommand => new RelayCommand<string>(
           DeleteSelectedRecipe,
           x => SelectedRecipe != null);
+
         public ICommand OpenBillDialogCommand => new RelayCommand<string>(
           OpenBillDialog,
           x => SelectedOrder != null);
+
+        public ICommand ReorderMissingResourcesCommand => new RelayCommand<string>(
+            ReorderMissingResources,
+            x => MissingResources.Count > 0);
+
+        public ICommand CompleteOrderCommand => new RelayCommand<string>(
+            CompleteOrder,
+            x => MissingResources.Count == 0);
+
+        private static Dictionary<Resource, double> CalcMissingResources(ObservableCollection<Recipe> recipes)
+        {
+            Dictionary<Resource, double> resources = new Dictionary<Resource, double>();
+
+            foreach (var recipe in recipes)
+            {
+                foreach(var resource in recipe.RecipeDetails.ToList())
+                {
+                    double amountToReorder = Math.Abs(resource.Resource.UnitsInStock - resource.Quantity);
+                    if (amountToReorder < 0 && !resources.ContainsKey(resource.Resource)) // Zu wenig Rohstoff vorhanden
+                    {
+                        resources.Add(resource.Resource, amountToReorder);
+                    }
+                    else if (amountToReorder < 0 && resources.ContainsKey(resource.Resource)) // Rohstoff schon bei fehlenden Rohstoffen
+                    {
+                        resources[resource.Resource] += amountToReorder; 
+                    }
+                }
+            }
+            return resources;
+        }
 
         /*/Helper*/
         private void AddOrder(string obj)
@@ -160,7 +203,7 @@ namespace Viemodel
         }
 
         private void DeleteSelectedOrder(string obj)
-        { 
+        {
             var deleteOrder = db.Orders.Single(x => x.Id == SelectedOrder.Id);
             db.Orders.Remove(deleteOrder);
             db.SaveChanges();
@@ -186,6 +229,14 @@ namespace Viemodel
                 addRecipeToOrderDialog.AddRecipeToOrder();
                 Recipes = db.OrderDetails.Where(x => x.OrderId == SelectedOrder.Id).Select(x => x.Recipe).AsObservableCollection();
             }
+        }
+        private void CompleteOrder(string obj)
+        {
+            throw new NotImplementedException();
+        }
+        private void ReorderMissingResources(string obj)
+        {
+            throw new NotImplementedException();
         }
         private void OpenBillDialog(string obj)
         {
