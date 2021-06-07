@@ -15,14 +15,16 @@ namespace Viemodel
     public class OrderViewModel : ObservableObject
     {
         private readonly MyDbContext db;
+        private readonly ResourceViewModel resourceViewModel;
 
         public OrderViewModel()
         {
 
         }
-        public OrderViewModel(MyDbContext db)
+        public OrderViewModel(MyDbContext db, ResourceViewModel resourceViewModel)
         {
             this.db = db;
+            this.resourceViewModel = resourceViewModel;
             Customers = db.Customers.AsObservableCollection();
         }
 
@@ -145,11 +147,11 @@ namespace Viemodel
 
         public ICommand ReorderMissingResourcesCommand => new RelayCommand<string>(
             ReorderMissingResources,
-            x => MissingResources.Count > 0);
+            x => MissingResources.Count > 0 && SelectedOrder != null );
 
         public ICommand CompleteOrderCommand => new RelayCommand<string>(
             CompleteOrder,
-            x => MissingResources.Count == 0 && SelectedOrder != null);
+            x => MissingResources.Count == 0 && SelectedOrder != null && SelectedOrder.Status != Status.Done);
 
         private static Dictionary<Resource, double> CalcMissingResources(ObservableCollection<Recipe> recipes)
         {
@@ -233,18 +235,40 @@ namespace Viemodel
         }
         private void CompleteOrder(string obj)
         {
-            throw new NotImplementedException();
-            //Rohstoffe
+            var currentOrder = SelectedOrder;
+            foreach(var recipe in currentOrder.OrderDetails.Select(x => x.Recipe))
+            {
+                foreach(var resource in recipe.RecipeDetails.Select(x => x.Resource))
+                {
+                    var updatingResource = db.Resources.Single(x => x.Id == resource.Id);
+                    var recipeQuantity = recipe.RecipeDetails.Single(x => x.ResourceId == resource.Id);
+                    updatingResource.UnitsInStock -= recipeQuantity.Quantity;
+                    db.SaveChanges();
+                    SelectedOrder.Status = Status.Done;
+                }
+            }
+            LoadViewModelData();
+            resourceViewModel.Resources = db.Resources.AsObservableCollection();
         }
         private void ReorderMissingResources(string obj)
         {
             var resourcesDialog = new MissingResourcesDialog(db, MissingResources);
             resourcesDialog.ShowDialog();
+            LoadViewModelData();
+            MissingResources = CalcMissingResources(Recipes);
+            resourceViewModel.Resources = db.Resources.AsObservableCollection();
         }
         private void OpenBillDialog(string obj)
         {
             BillDialog billDialog = new BillDialog(db, SelectedOrder);
             billDialog.ShowDialog();
+        }
+        public void LoadViewModelData()
+        {
+            Customers = db.Customers.AsObservableCollection();
+            Orders = db.Orders.Where(x => x.CustomerId == SelectedCustomer.Id).AsObservableCollection();
+            Recipes = db.OrderDetails.Where(x => x.OrderId == SelectedOrder.Id).Select(x => x.Recipe).AsObservableCollection();
+            SelectedOrder.OrderDetails = db.OrderDetails.Where(x => x.OrderId == SelectedOrder.Id).ToList();
         }
     }
 }

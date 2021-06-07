@@ -86,7 +86,7 @@
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
-                                <DataGridTextColumn Binding="{Binding UnitsInOrder}" Header="Lagernd"/>
+                                <DataGridTextColumn Binding="{Binding UnitsInOrder}" Header="Menge"/>
                                 <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
                                 <DataGridTextColumn Binding="{Binding NetpriceOutputFormat}" Header="Nettopreis"/>
                                 <DataGridTextColumn Binding="{Binding TaxrateOutputFormat}" Header="Steuersatz" />

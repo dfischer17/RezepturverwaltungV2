@@ -10,6 +10,7 @@ namespace Database.Entities
         public string Unit { get; set; }
         public double Netprice { get; set; }
         public double Taxrate { get; set; }
+        public int Container { get; set; }
         public List<RecipeDetail> RecipeDetails { get; set; }
 
         private string netpriceOutputFormat;
@@ -26,7 +27,6 @@ namespace Database.Entities
             get { return $"{Taxrate}%"; }
             set { taxrateOutputFormat = value; }
         }
-
 
         private double CalculateGrossPrice()
         {

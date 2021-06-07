@@ -71,7 +71,6 @@ namespace Viemodel
             }
         }
 
-
         public string Unit
         {
             get { return unit; }

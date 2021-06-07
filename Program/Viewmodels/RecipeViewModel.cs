@@ -15,13 +15,13 @@ using System.Windows.Input;
 
 namespace Viemodel
 {
-    public class RecipeViewModel: ObservableObject
+    public class RecipeViewModel : ObservableObject
     {
         private readonly MyDbContext db;
 
         public RecipeViewModel(MyDbContext db)
         {
-            this.db = db;            
+            this.db = db;
             Recipes = db.Recipes.AsObservableCollection();
         }
 
@@ -35,8 +35,8 @@ namespace Viemodel
 
         public ObservableCollection<Recipe> Recipes
         {
-            get => recipes; 
-            set 
+            get => recipes;
+            set
             {
                 recipes = value;
                 RaisePropertyChangedEvent(nameof(Recipes));
@@ -80,7 +80,7 @@ namespace Viemodel
                 RaisePropertyChangedEvent(nameof(UnitTxtBox));
             }
         }
-                
+
         public Recipe SelectedRecipe
         {
             get { return selectedRecipe; }
@@ -92,7 +92,7 @@ namespace Viemodel
                 {
                     RecipeResources = ToDatagridResources(db.RecipeDetails.Where(x => x.RecipeId == selectedRecipe.Id).Select(x => x.Resource).AsObservableCollection());
                     RaisePropertyChangedEvent(nameof(selectedRecipe));
-                }                
+                }
             }
         }
 
@@ -104,10 +104,9 @@ namespace Viemodel
             set
             {
                 selectedResource = value;
-                RaisePropertyChangedEvent(nameof(SelectedResource));            
+                RaisePropertyChangedEvent(nameof(SelectedResource));
             }
         }
-
 
 
         private ObservableCollection<DatagridResource> recipeResources;
@@ -122,7 +121,7 @@ namespace Viemodel
             }
         }
 
-        /*Commands*/      
+        /*Commands*/
         public ICommand OpenAddRecipeDialogCommand => new RelayCommand<string>(
             OpenAddRecipeDialog,
             x => x == x
@@ -132,7 +131,7 @@ namespace Viemodel
              OpenAddResourceToRecipeDialog,
              x => SelectedRecipe != null
              );
-        
+
         public ICommand OpenEditRecipeDialogCommand => new RelayCommand<string>(
             OpenEditRecipeDialog,
             x => SelectedRecipe != null
@@ -140,7 +139,7 @@ namespace Viemodel
 
         public ICommand DeleteSelectedRecipeCommand => new RelayCommand<string>(
             DeleteSelecedRecipe,
-            x => SelectedRecipe != null 
+            x => SelectedRecipe != null
             );
 
         public ICommand DeleteSelectedResourceCommand => new RelayCommand<string>(
@@ -179,14 +178,14 @@ namespace Viemodel
         }
 
         private void DeleteSelectedResource(string obj)
-        {            
-            var deleteResource =  SelectedResource;
+        {
+            var deleteResource = SelectedResource;
 
             var deleteRecipeDetail = SelectedRecipe.RecipeDetails.Single(x => x.ResourceId == deleteResource.Id);
             db.RecipeDetails.Remove(deleteRecipeDetail);
             db.SaveChanges();
 
-            RecipeResources = ToDatagridResources(db.RecipeDetails.Where(x => x.RecipeId == SelectedRecipe.Id).Select(x => x.Resource).AsObservableCollection());            
+            RecipeResources = ToDatagridResources(db.RecipeDetails.Where(x => x.RecipeId == SelectedRecipe.Id).Select(x => x.Resource).AsObservableCollection());
         }
 
         private void OpenAddResourceToRecipeDialog(string obj)
@@ -202,7 +201,7 @@ namespace Viemodel
 
         // Utility
         private ObservableCollection<DatagridResource> ToDatagridResources(ObservableCollection<Resource> resources)
-        {            
+        {
             ObservableCollection<DatagridResource> datagridResources = new();
 
             foreach (var resource in resources)

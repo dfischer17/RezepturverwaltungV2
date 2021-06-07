@@ -11,7 +11,8 @@ namespace Database.Utility
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Einheit { get; set; }
         public double Fehlend { get; set; }
+        public int Gefaeß { get; set; }
+        public string Einheit { get; set; }
     }
 }

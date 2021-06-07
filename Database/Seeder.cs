@@ -27,6 +27,7 @@ namespace Database
                 Netprice = 1.20,
                 Taxrate = 0.2,
                 Unit = "ml",
+                Container = 5,
             });
             modelBuilder.Entity<Resource>().HasData(new Resource
             {
@@ -36,6 +37,7 @@ namespace Database
                 Netprice = 4.8,
                 Taxrate = 0.2,
                 Unit = "ml",
+                Container = 10,
             });
             modelBuilder.Entity<Resource>().HasData(new Resource
             {
@@ -45,6 +47,7 @@ namespace Database
                 Netprice = 4.8,
                 Taxrate = 0.2,
                 Unit = "ml",
+                Container = 5,
             });
             modelBuilder.Entity<Resource>().HasData(new Resource
             {
@@ -54,6 +57,7 @@ namespace Database
                 Netprice = 7.0,
                 Taxrate = 0.15,
                 Unit = "g",
+                Container = 10,
             });
 
             //Recipe
@@ -194,30 +198,34 @@ namespace Database
         public static void SeedResources(this ModelBuilder modelBuilder, string filename)
         {
             //Seed Resources
-            var encoding = Encoding.UTF8;
-            var lines = File.ReadAllLines(filename, encoding);
+            var lines = File.ReadAllLines(filename, Encoding.UTF7);
             foreach (var line in lines)
             {
                 var values = line.Split(";");
 
                 if (values[3] == "" || values[3].Trim() == "-") values[3] = "0";
                 if (values[4] == "") values[4] = "0";
+                if (values[8].Trim() == "-") values[8] = "0";
+                if (values[5].Trim() == "") values[5] = "0";
+                if (values[7].Trim() == "") values[7] = "0";
 
                 modelBuilder.Entity<Resource>().HasData(new Resource
                 {
                     Id = Int32.Parse(values[0]),
                     Name = values[1],
                     UnitsInStock = Convert.ToDouble(values[2].Trim()),
-                    Netprice = Convert.ToDouble(values[3].Trim()),
-                    Taxrate = Convert.ToDouble(values[4].Trim()),
+                    Netprice = Convert.ToDouble(values[8].Trim()),
+                    Taxrate = Convert.ToDouble(values[7].Trim()),
+                    Container = Int32.Parse(values[4]),
                     Unit = values[5].Trim(),
                 });
+
             }
         }
         public static void SeedRecipes(this ModelBuilder modelBuilder, string filename)
         {
             //Seed Recipes
-            var lines = File.ReadAllLines(filename);
+            var lines = File.ReadAllLines(filename, Encoding.UTF7);
             foreach (var line in lines)
             {
                 var values = line.Split(";");
@@ -228,7 +236,7 @@ namespace Database
                     Name = values[1],
                     Amount = Int32.Parse(values[2]),
                     Unit = values[3],
-                    Costprice = 0,
+                    Costprice = 1,
                     Retailprice = 10,
                 });
             }
@@ -237,7 +245,7 @@ namespace Database
         {
             //Seed RecipeDetails
             int recipeDetailId = 0;
-            var lines = File.ReadAllLines(filename);
+            var lines = File.ReadAllLines(filename, Encoding.UTF7);
             for (int j = 0; j < lines.Length; j++)
             {
                 var values = lines[j].Split(";");
@@ -259,7 +267,6 @@ namespace Database
                 }
             }
         }
-
         public static void SeedCustomers(this ModelBuilder modelBuilder)
         {
             //Seed Customers
@@ -396,6 +403,5 @@ namespace Database
                 Quantity = 7,
             });
         }
-
     }
 }

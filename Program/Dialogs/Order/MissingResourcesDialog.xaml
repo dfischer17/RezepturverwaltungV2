@@ -7,14 +7,24 @@
         mc:Ignorable="d"
         Title="Fehlende Rohstoffe" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel>
-            <DataGrid Name="datagridResources" IsReadOnly="True" >
-            </DataGrid>
-            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                <Button Content="Rohstoffe bestellen" x:Name="btnReorderResources" Margin="2,0,5,2" ></Button>
-                <Button HorizontalAlignment="Right" Content="Schließen" Click="Button_Click" Margin="5,0,2,2" ></Button>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <DataGrid Name="datagridResources" IsReadOnly="True" >
+                </DataGrid>
+                <DataGrid AutoGenerateColumns="False" Name="datagridResourcesDetail">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Bestellmenge" Binding="{Binding Quantity}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </StackPanel>
+            <Grid Margin="0,5,0,0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" HorizontalAlignment="Stretch" Content="Lager aktualisieren" Click="UpdateStorage_Click" x:Name="btnReorderResources" Margin="2,0,5,2" ></Button>
+                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Schließen" Click="CloseButton_Click" Margin="5,0,2,2" ></Button>
+            </Grid>
         </StackPanel>
-        
     </Grid>
 </Window>

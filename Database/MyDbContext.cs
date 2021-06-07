@@ -19,6 +19,7 @@ namespace Database
         public DbSet<Resource> Resources { get; set; } 
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<RecipeDetail> RecipeDetails { get; set; }
+        public DbSet<ResourceDetail> ResourceDetails { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

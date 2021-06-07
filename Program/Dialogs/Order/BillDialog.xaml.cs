@@ -30,7 +30,6 @@ namespace Program.Dialogs.Order
         public BillDialog(MyDbContext db, Database.Entities.Order selectedOrder)
         {
             InitializeComponent();
-
             this.db = db;
             this.selectedOrder = selectedOrder;
             BillingDate.Content = DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss");
