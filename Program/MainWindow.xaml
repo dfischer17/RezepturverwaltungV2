@@ -146,6 +146,9 @@
                             <Button Content="Bestellung abschließen" Command="{Binding CompleteOrderCommand}" ></Button>
                         </StackPanel>
                     </StackPanel>
+
+                    <Button Command="{Binding ReorderAllMissingResourcesCommand}" Grid.Column="0" Grid.Row="1" Height="30" Width="300" VerticalAlignment="Top" Margin="0,10,0,0" Content="Alle fehlenden Rohstoffe" ></Button>
+                    <Button Command="{Binding CompleteAllOrdersCommand}" Grid.Column="0" Grid.Row="1" Height="30" Width="300" VerticalAlignment="Center" Content="Alle Bestellungen abschließen" ></Button>
                 </Grid>
             </TabItem>
         </TabControl>
