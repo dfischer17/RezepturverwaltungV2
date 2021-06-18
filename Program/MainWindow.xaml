@@ -7,15 +7,21 @@
         xmlns:viewmodel.Viewmodels="clr-namespace:Viemodel"
         mc:Ignorable="d"
         Title="Rezepturverwaltung" Height="700" Width="1200"
-        Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+        Loaded="Window_Loaded" WindowStartupLocation="CenterScreen"
+        MinWidth="900" MinHeight="350">
     <Window.DataContext>
         <viewmodel.Viewmodels:MainViewModel></viewmodel.Viewmodels:MainViewModel>
     </Window.DataContext>
     <Grid>
-        <TabControl>
+        <TabControl FontSize="20">
             <TabItem Header="Rohstoffe">
-                <StackPanel DataContext="{Binding ResourceViewModel}">
-                    <DataGrid MaxHeight="590" IsReadOnly="True" Name="resourceGrid" Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Resources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource}">
+                <Grid DataContext="{Binding ResourceViewModel}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <DataGrid FontSize="15" Grid.Row="0" IsReadOnly="True" Name="resourceGrid" Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Resources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                             <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
@@ -26,19 +32,23 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
-                        <Button Content="Rohstoff erstellen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddResourceDialogCommand, Mode=OneWay}"/>
-                        <Button Content="Rohstoff ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditResourceDialogCommand, Mode=OneWay}"/>
-                        <Button Content="Rohstoff löschen" Background="Red" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"/>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="15 0 0 10">
+                        <Button Padding="3 3 3 3" FontSize="18" Content="Rohstoff erstellen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddResourceDialogCommand, Mode=OneWay}"/>
+                        <Button FontSize="18" Content="Rohstoff ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditResourceDialogCommand, Mode=OneWay}"/>
+                        <Button FontSize="18" Content="Rohstoff löschen" Background="Red" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"/>
                     </StackPanel>
                     
-                </StackPanel>
+                </Grid>
             </TabItem>
 
             <TabItem Header="Kunden">
-                <StackPanel DataContext="{Binding CustomerViewModel}">
-
-                    <DataGrid IsReadOnly="True" Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, AsyncState=True}" SelectedItem="{Binding SelectedCustomer}">
+                <Grid DataContext="{Binding CustomerViewModel}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <DataGrid FontSize="15" Grid.Row="0" IsReadOnly="True" Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Customers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, AsyncState=True}" SelectedItem="{Binding SelectedCustomer}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                             <DataGridTextColumn Binding="{Binding Lastname}" Header="Nachname"/>
@@ -48,12 +58,12 @@
                         </DataGrid.Columns>
                     </DataGrid>
 
-                    <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
-                        <Button Content="Kunde erstellen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddCustomerDialogCommand, Mode=OneWay}"/>
-                        <Button Content="Kunde ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditCustomerDialogCommand, Mode=OneWay}"/>
-                        <Button Content="Kunde löschen" Background="Red" Command="{Binding DeleteSelectedCustomerCommand, Mode=OneWay}"/>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="15 0 0 10">
+                        <Button Padding="3 3 3 3" FontSize="18" Content="Kunde erstellen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddCustomerDialogCommand, Mode=OneWay}"/>
+                        <Button FontSize="18" Content="Kunde ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditCustomerDialogCommand, Mode=OneWay}"/>
+                        <Button FontSize="18" Content="Kunde löschen" Background="Red" Command="{Binding DeleteSelectedCustomerCommand, Mode=OneWay}"/>
                     </StackPanel>
-                </StackPanel>
+                </Grid>
             </TabItem>
             <TabItem Header="Rezepte">
                 <Grid DataContext="{Binding RecipeViewModel}">
@@ -62,8 +72,13 @@
                         <ColumnDefinition Width="1*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <StackPanel Grid.Column="0">
-                        <DataGrid MaxHeight="590" IsReadOnly="True" AutoGenerateColumns="False" Name="recipeGrid" Margin="0 0 0 20" SelectedItem="{Binding SelectedRecipe}" ItemsSource="{Binding Recipes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <DataGrid FontSize="15" Grid.Row="0" IsReadOnly="True" AutoGenerateColumns="False" Name="recipeGrid" Margin="0 0 0 20" SelectedItem="{Binding SelectedRecipe}" ItemsSource="{Binding Recipes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
@@ -74,15 +89,20 @@
                             </DataGrid.Columns>
                         </DataGrid>
 
-                        <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
-                            <Button Content="Rezept erstellen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddRecipeDialogCommand, Mode=OneWay}"/>
-                            <Button Content="Rezept ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditRecipeDialogCommand, Mode=OneWay}"/>
-                            <Button Content="Rezept löschen" Background="Red" Command="{Binding DeleteSelectedRecipeCommand, Mode=OneWay}"/>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="15 0 0 10">
+                            <Button Padding="3 3 3 3" FontSize="18" Content="Rezept erstellen" Background="LightGreen" Margin="0 0 10 0" Command="{Binding OpenAddRecipeDialogCommand, Mode=OneWay}"/>
+                            <Button FontSize="18" Content="Rezept ändern" Background="LightBlue" Margin="0 0 10 0" Command="{Binding OpenEditRecipeDialogCommand, Mode=OneWay}"/>
+                            <Button FontSize="18" Content="Rezept löschen" Background="Red" Command="{Binding DeleteSelectedRecipeCommand, Mode=OneWay}"/>
                         </StackPanel>
-                    </StackPanel>
+                    </Grid>
                                        
-                    <StackPanel Grid.Column="1">
-                        <DataGrid MaxHeight="590" AutoGenerateColumns="False" IsReadOnly="True" Name="recipeDetails" Margin="0 0 0 10" ItemsSource="{Binding RecipeResources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <DataGrid FontSize="15" Grid.Row="0" AutoGenerateColumns="False" IsReadOnly="True" Name="recipeDetails" Margin="0 0 0 10" ItemsSource="{Binding RecipeResources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Id}" Header="Id"/>
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
@@ -92,46 +112,68 @@
                                 <DataGridTextColumn Binding="{Binding TaxrateOutputFormat}" Header="Steuersatz" />
                             </DataGrid.Columns>
                         </DataGrid>
-                        <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
-                            <Button Content="Zutat hinzufügen" Margin="0 0 10 0" Command="{Binding OpenAddResourceToRecipeDialogCommand, Mode=OneWay}"></Button>
-                            <Button Content="Zutat entfernen" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"></Button>
+
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="15 0 0 10">
+                            <Button Padding="2 2 2 2" FontSize="18" Content="Zutat hinzufügen" Margin="0 0 10 0" Command="{Binding OpenAddResourceToRecipeDialogCommand, Mode=OneWay}"></Button>
+                            <Button FontSize="18" Content="Zutat entfernen" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"></Button>
                         </StackPanel>
-                        
-                    </StackPanel>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Bestellungen">
                 <Grid DataContext="{Binding OrderViewModel}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"></ColumnDefinition>
-                        <ColumnDefinition Width="1*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="1*"></RowDefinition>
                         <RowDefinition Height="1*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <ListView SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}" Grid.Row="0" Grid.Column="0">
-                    </ListView>
-                    <StackPanel Grid.Row="0" Grid.Column="1">
-                        <DataGrid IsReadOnly="True" Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding Orders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+
+                    <Grid Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <ListView FontSize="18" Grid.Row="0" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}"></ListView>
+                        <StackPanel Grid.Row="1" Margin="0 0 0 10">
+                            <Button Padding="0 5 0 5" FontSize="16" Command="{Binding ReorderAllMissingResourcesCommand}" Margin="0 15 0 10" Content="Alle fehlenden Rohstoffe"></Button>
+                            <Button Padding="0 5 0 5" FontSize="16" Command="{Binding CompleteAllOrdersCommand}" Content="Alle Bestellungen abschließen" ></Button>
+                        </StackPanel>
+                        
+                    </Grid>
+                                        
+                    <Grid Grid.Row="0" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <DataGrid Grid.Row="0" FontSize="15" IsReadOnly="True" Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding Orders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedOrder, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding OrderDateFormatted}" Header="Bestelldatum"/>
                                 <DataGridTextColumn Binding="{Binding DelieverDateFormatted}" Header="Lieferdatum"/>
                                 <DataGridTextColumn Binding="{Binding Status}" Header="Status"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
-                            <Button Command="{Binding AddOrderCommand}" Margin="0 0 10 0" Content="Bestellung hinzufügen"></Button>
-                            <Button Command="{Binding EditOrderCommand}" Margin="0 0 10 0" Content="Bestellung ändern"></Button>
-                            <Button Command="{Binding DeleteOrderCommand}"  Margin="0 0 10 0" Content="Bestellung entfernen"></Button>
-                            <Button Command="{Binding OpenBillDialogCommand, Mode=OneWay}" Content="Rechnung anzeigen"></Button>
-
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="15 0 0 30">
+                            <Button Padding="3 3 3 3" FontSize="16" Command="{Binding AddOrderCommand}" Margin="0 0 10 0" Content="Bestellung hinzufügen"></Button>
+                            <Button Padding="3 3 3 3" FontSize="16" Command="{Binding EditOrderCommand}" Margin="0 0 10 0" Content="Bestellung ändern"></Button>
+                            <Button Padding="3 3 3 3" FontSize="16" Command="{Binding DeleteOrderCommand}"  Margin="0 0 10 0" Content="Bestellung entfernen"></Button>
+                            <Button Padding="3 3 3 3" FontSize="16" Command="{Binding OpenBillDialogCommand, Mode=OneWay}" Content="Rechnung anzeigen"></Button>
                         </StackPanel>
                         
-                    </StackPanel>
+                    </Grid>
 
-                    <StackPanel Grid.Row="1" Grid.Column="1">
-                        <DataGrid IsReadOnly="True" Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}">
+                    <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="Auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        
+                        <DataGrid Grid.Row="0" FontSize="15" IsReadOnly="True" Margin="0 0 0 10" AutoGenerateColumns="False" ItemsSource="{Binding Recipes}" SelectedItem="{Binding SelectedRecipe}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
                                 <DataGridTextColumn Binding="{Binding Amount}" Header="Menge"/>
@@ -139,16 +181,13 @@
                                 <DataGridTextColumn Binding="{Binding RetailpriceOutputFormat}" Header="Preis"/>
                             </DataGrid.Columns>
                         </DataGrid>
-                        <StackPanel Orientation="Horizontal" Margin="15 0 0 0">
-                            <Button Content="Rezept hinzufügen" Margin="0 0 10 0"  Command="{Binding OpenAddRecipeToOrderDialogCommand}"></Button>
-                            <Button Content="Rezept entfernen" Margin="0,0,10,0" Command="{Binding DeleteSelectedRecipeCommand}"></Button>
-                            <Button Content="Fehlende Rohstoffe" Margin="0,0,10,0" Command="{Binding ReorderMissingResourcesCommand}" ></Button>
-                            <Button Content="Bestellung abschließen" Command="{Binding CompleteOrderCommand}" ></Button>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="15 0 0 30">
+                            <Button Padding="3 3 3 3" FontSize="16" Content="Rezept hinzufügen" Margin="0 0 10 0"  Command="{Binding OpenAddRecipeToOrderDialogCommand}"></Button>
+                            <Button Padding="3 3 3 3" FontSize="16" Content="Rezept entfernen" Margin="0,0,10,0" Command="{Binding DeleteSelectedRecipeCommand}"></Button>
+                            <Button Padding="3 3 3 3" FontSize="16" Content="Fehlende Rohstoffe" Margin="0,0,10,0" Command="{Binding ReorderMissingResourcesCommand}" ></Button>
+                            <Button Padding="3 3 3 3" FontSize="16" Content="Bestellung abschließen" Command="{Binding CompleteOrderCommand}" ></Button>
                         </StackPanel>
-                    </StackPanel>
-
-                    <Button Command="{Binding ReorderAllMissingResourcesCommand}" Grid.Column="0" Grid.Row="1" Height="30" Width="300" VerticalAlignment="Top" Margin="0,10,0,0" Content="Alle fehlenden Rohstoffe" ></Button>
-                    <Button Command="{Binding CompleteAllOrdersCommand}" Grid.Column="0" Grid.Row="1" Height="30" Width="300" VerticalAlignment="Center" Content="Alle Bestellungen abschließen" ></Button>
+                    </Grid>
                 </Grid>
             </TabItem>
         </TabControl>
