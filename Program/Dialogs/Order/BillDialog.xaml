@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Program.Dialogs.Order"
         mc:Ignorable="d"
-        Title="Rechnung anzeigen" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        Title="Rechnung anzeigen" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid DataContext="{Binding BillViewModel}">
-            <StackPanel Grid.Column="0" Grid.Row="1">
+            <StackPanel Grid.Column="0" Grid.Row="1" Margin="20 10 20 10">
 
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                     <Label Content="Firmenname:"></Label>
@@ -29,15 +29,15 @@
                     <Label Content="Rechnungsnummer:"></Label>
                     <Label Width="200px" Margin="3 0 0 0"  Content="1"></Label>
                 </StackPanel>
-                <DataGrid x:Name="Orderpositions" >
+                <DataGrid x:Name="Orderpositions" Margin="0 0 0 20">
 
                 </DataGrid>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                    <Label Content="Summe:"></Label>
-                    <Label x:Name="Total" Width="200px" Margin="67 0 0 0"></Label>
+                    <Label FontSize="20" Content="Summe:"></Label>
+                    <Label FontSize="20" x:Name="Total" Width="200px" Margin="67 0 0 0"></Label>
                 </StackPanel>
-                <Button Content="Schließen" Click="Button_Click"></Button>
-
+                
+                <Button Height="30" Content="Schließen" Click="Button_Click"></Button>
             </StackPanel>
         </Grid>
 
