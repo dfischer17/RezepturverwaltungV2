@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Program.Dialogs.Order"
         mc:Ignorable="d"
-        Title="Rezept zu Bestellung  hinzufügen" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        Title="Rezept zu Bestellung  hinzufügen" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
