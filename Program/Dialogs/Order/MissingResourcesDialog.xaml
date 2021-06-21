@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Program.Dialogs.Order"
         mc:Ignorable="d"
-        Title="Fehlende Rohstoffe" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        Title="Fehlende Rohstoffe" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel Orientation="Vertical">
-            <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Vertical" Margin="20 10 20 10">
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 15">
                 <DataGrid Name="datagridResources" IsReadOnly="True" >
                 </DataGrid>
                 <DataGrid AutoGenerateColumns="False" Name="datagridResourcesDetail">
@@ -22,8 +22,8 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" HorizontalAlignment="Stretch" Content="Lager aktualisieren" Click="UpdateStorage_Click" x:Name="btnReorderResources" Margin="2,0,5,2" ></Button>
-                <Button Grid.Column="1" HorizontalAlignment="Stretch" Content="Schließen" Click="CloseButton_Click" Margin="5,0,2,2" ></Button>
+                <Button Height="30" Grid.Column="0" HorizontalAlignment="Stretch" Content="Lager aktualisieren" Click="UpdateStorage_Click" x:Name="btnReorderResources" Margin="2,0,5,2" ></Button>
+                <Button Height="30" Grid.Column="1" HorizontalAlignment="Stretch" Content="Schließen" Click="CloseButton_Click" Margin="5,0,2,2" ></Button>
             </Grid>
         </StackPanel>
     </Grid>
