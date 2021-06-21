@@ -178,6 +178,7 @@
                                 <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
                                 <DataGridTextColumn Binding="{Binding Amount}" Header="Menge"/>
                                 <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
+                                <DataGridTextColumn Binding="{Binding }" Header="Anzahl"/>
                                 <DataGridTextColumn Binding="{Binding RetailpriceOutputFormat}" Header="Preis"/>
                             </DataGrid.Columns>
                         </DataGrid>

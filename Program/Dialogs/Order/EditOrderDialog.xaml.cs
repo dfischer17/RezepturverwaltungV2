@@ -36,7 +36,7 @@ namespace Program.Dialogs.Order
 
             // Previous order values before editing
             orderDatePicker.SelectedDate = selectedOrder.OrderDate;
-            deliverDatePicker.SelectedDate = selectedOrder.OrderDate;
+            deliverDatePicker.SelectedDate = selectedOrder.DeliveryDate;
         }
 
         public void EditOrder()

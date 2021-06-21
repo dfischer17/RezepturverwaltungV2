@@ -17,6 +17,7 @@ namespace Database.Entities
         public List<OrderDetail> OrderDetails { get; set; }
         public List<RecipeDetail> RecipeDetails{ get; set; }
 
+
         private string costpriceOutputFormat;       
 
         public string CostpriceOutputFormat
