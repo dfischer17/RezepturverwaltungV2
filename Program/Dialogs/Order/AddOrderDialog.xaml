@@ -5,19 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Program.Dialogs.Order"
         mc:Ignorable="d"
-        Title="Bestellung hinzufügen" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        Title="Bestellung hinzufügen" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel Grid.Row="1">
+        <StackPanel Grid.Row="1" Margin="30 0 30 12">
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <Label Content="Bestelldatum"></Label>
                 <DatePicker Name="orderDatePicker"></DatePicker>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <Label Content="Lieferdatum"></Label>
+            <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
+                <Label Content="Lieferdatum "></Label>
                 <DatePicker Name="deliverDatePicker"></DatePicker>
             </StackPanel>
 
-            <Button Content="Bestellung hinzufügen" Click="Button_Click"></Button>
+            <Button Height="30" Content="Bestellung hinzufügen" Click="Button_Click"></Button>
         </StackPanel>
     </Grid>
 </Window>
