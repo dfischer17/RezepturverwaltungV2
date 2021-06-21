@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Program.Dialogs"
         xmlns:viewmodel.Viewmodels="clr-namespace:Viemodel"
         mc:Ignorable="d"
-        Title="Rohstoff hinzufügen" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        Title="Rohstoff hinzufügen" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -32,7 +32,6 @@
             <TextBox Margin="0 0 0 5" Height="26" Width="200px" Name="netpriceTxtbox"></TextBox>
             <TextBox Margin="0 0 0 5" Height="26" Width="200px" Name="taxrateTxtbox"></TextBox>
         </StackPanel>
-
        
         <Button Height="30" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Rohstoff hinzufügen" Click="Button_Click"></Button>
     </Grid>
