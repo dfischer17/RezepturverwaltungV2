@@ -139,8 +139,8 @@
                         
                         <ListView FontSize="18" Grid.Row="0" SelectedItem="{Binding SelectedCustomer}" ItemsSource="{Binding Customers}"></ListView>
                         <StackPanel Grid.Row="1" Margin="0 0 0 10">
-                            <Button Padding="0 5 0 5" FontSize="16" Command="{Binding ReorderAllMissingResourcesCommand}" Margin="0 15 0 10" Content="Alle fehlenden Rohstoffe"></Button>
-                            <Button Padding="0 5 0 5" FontSize="16" Command="{Binding CompleteAllOrdersCommand}" Content="Alle Bestellungen abschließen" ></Button>
+                            <Button Padding="0 5 0 5" FontSize="16" Command="{Binding ReorderAllMissingResourcesCommand}" Margin="5 15 10 10" Content="Alle fehlenden Rohstoffe"></Button>
+                            <Button Padding="0 5 0 5" FontSize="16" Command="{Binding CompleteAllOrdersCommand}" Margin="5 0 10 0" Content="Bestellungen abschließen" ></Button>
                         </StackPanel>
                         
                     </Grid>
