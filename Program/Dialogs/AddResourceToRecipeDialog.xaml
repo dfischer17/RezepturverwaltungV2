@@ -5,9 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Program.Dialogs"
         mc:Ignorable="d"
-        Title="Zutat hinzufügen" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
+        Title="Zutat hinzufügen" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        <StackPanel Margin="20 0 20 0" Grid.Row="0">
             <DataGrid IsReadOnly="True" MaxHeight="500" Name="resourceGrid" AutoGenerateColumns="False" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" ItemsSource="{Binding Resources}" SelectedItem="{Binding SelectedResource}">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
@@ -16,13 +21,13 @@
                     <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>
                 </DataGrid.Columns>
             </DataGrid>
-            
-            <StackPanel Orientation="Horizontal">
+
+            <StackPanel Margin="0 10 0 10" Orientation="Horizontal">
                 <Label Content="Menge:"></Label>
                 <TextBox Name="amountTxtbox" Width="200"></TextBox>
             </StackPanel>
-            
-            <Button Content="Zutat zu Rezept hinzufügen" Click="Button_Click"></Button>
         </StackPanel>
+
+        <Button Height="30" Grid.Row="1" Content="Zutat zu Rezept hinzufügen" Click="Button_Click"></Button>
     </Grid>
 </Window>
