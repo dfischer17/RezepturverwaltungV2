@@ -30,6 +30,6 @@
             <TextBox Height="26" Width="200px" Name="emailTxtbox"></TextBox>
         </StackPanel>
 
-        <Button Height="30" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Kunde hinzufügen" Click="Button_Click"></Button>
+        <Button Margin="30 0 30 10" Height="30" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Kunde hinzufügen" Click="Button_Click"></Button>
     </Grid>
 </Window>

@@ -28,6 +28,6 @@
             </StackPanel>
         </StackPanel>
 
-        <Button Height="30" Grid.Row="1" Content="Zutat zu Rezept hinzufügen" Click="Button_Click"></Button>
+        <Button Margin="30 0 30 10" Height="30" Grid.Row="1" Content="Zutat zu Rezept hinzufügen" Click="Button_Click"></Button>
     </Grid>
 </Window>
