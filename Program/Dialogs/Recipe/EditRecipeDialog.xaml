@@ -7,28 +7,31 @@
         mc:Ignorable="d"
         Title="Rezept ändern" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen">
     <Grid>
-        <StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <Label Content="Bezeichnung:"></Label>
-                <TextBox Name="descTxtbox" Width="200px"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <Label Content="Menge:"></Label>
-                <TextBox Name="amountTxtbox" Width="200px"/>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <Label Content="Einheit:"></Label>
-                <TextBox Name="unitTxtbox" Width="200px"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <Label Content="Produktionspreis:"></Label>
-                <TextBox Name="prodPrice" Width="200px"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <Label Content="Verkaufspreis:"></Label>
-                <TextBox Name="retailPrice" Width="200px"></TextBox>
-            </StackPanel>
-            <Button Content="Rezept ändern" Click="Button_Click"></Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.Row="0" Margin="16 10 0 0">
+            <Label Margin="0 0 0 5" Content="Bezeichnung:"></Label>
+            <Label Margin="0 0 0 5" Content="Menge:"></Label>
+            <Label Margin="0 0 0 5" Content="Einheit:"></Label>
+            <Label Margin="0 0 0 5" Content="Produktionspreis:"></Label>
+            <Label Content="Verkaufspreis:"></Label>
         </StackPanel>
+
+        <StackPanel Grid.Column="1" Grid.Row="0" Margin="0 10 20 10">
+            <TextBox Margin="0 0 0 5" Height="26" Name="descTxtbox" Width="200px"></TextBox>
+            <TextBox Margin="0 0 0 5" Height="26" Name="amountTxtbox" Width="200px"/>
+            <TextBox Margin="0 0 0 5" Height="26" Name="unitTxtbox" Width="200px"></TextBox>
+            <TextBox Margin="0 0 0 5" Height="26" Name="prodPrice" Width="200px"></TextBox>
+            <TextBox Height="26" Name="retailPrice" Width="200px"></TextBox>
+        </StackPanel>
+
+        <Button Margin="30 0 30 10" Height="30" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Rezept ändern" Click="Button_Click"></Button>
     </Grid>
 </Window>

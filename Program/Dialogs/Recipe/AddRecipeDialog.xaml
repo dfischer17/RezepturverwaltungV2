@@ -32,6 +32,6 @@
             <TextBox Height="26" Name="retailPrice" Width="200px"></TextBox>
         </StackPanel>
 
-        <Button Height="30" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Rezept hinzufügen" Click="Button_Click"></Button>
+        <Button Margin="30 0 30 10" Height="30" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Content="Rezept hinzufügen" Click="Button_Click"></Button>
     </Grid>
 </Window>
