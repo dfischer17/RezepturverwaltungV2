@@ -18,7 +18,7 @@ namespace Database.Utility
 
         public string NetpriceOutputFormat
         {
-            get { return $"{Netprice}€"; }
+            get { return $"{Netprice.ToString("C")}€"; }
             set { netpriceOutputFormat = value; }
         }
         private string taxrateOutputFormat;

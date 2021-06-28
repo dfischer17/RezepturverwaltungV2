@@ -23,7 +23,7 @@
                     
                     <DataGrid FontSize="15" Grid.Row="0" IsReadOnly="True" Name="resourceGrid" Margin="0 0 0 20" AutoGenerateColumns="False" ItemsSource="{Binding Resources, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedResource}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Id}" Header="ID"/>
+                            <DataGridTextColumn Binding="{Binding Id}" Header="ID" />
                             <DataGridTextColumn Binding="{Binding Name}" Header="Bezeichnung"/>
                             <DataGridTextColumn Binding="{Binding UnitsInStock}" Header="Lagernd"/>
                             <DataGridTextColumn Binding="{Binding Unit}" Header="Einheit"/>

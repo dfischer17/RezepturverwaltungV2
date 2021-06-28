@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Database.Entities
 {
@@ -17,7 +18,7 @@ namespace Database.Entities
 
         public string NetpriceOutputFormat
         {
-            get { return $"{Netprice}€"; }
+            get { return $"{Netprice.ToString("C")}€"; }
             set { netpriceOutputFormat = value; }
         }
         private string taxrateOutputFormat;
