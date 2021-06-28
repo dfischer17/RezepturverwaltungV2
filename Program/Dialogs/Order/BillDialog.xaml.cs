@@ -33,7 +33,8 @@ namespace Program.Dialogs.Order
             this.db = db;
             this.selectedOrder = selectedOrder;
             BillingDate.Content = DateTime.Now.ToString("dd.MM.yyyy hh:mm:ss");
-            Orderpositions.ItemsSource = db.OrderDetails.Where(x => x.OrderId == selectedOrder.Id).Select(x => new DataGridOrderpositions(x.Recipe.Name, x.Quantity, x.Recipe.Retailprice, x.Recipe.RetailpriceOutputFormat)).ToList();
+            Orderpositions.ItemsSource = db.OrderDetails.Where(x => x.OrderId == selectedOrder.Id)
+                .Select(x => new DataGridOrderpositions(x.Recipe.Name, x.Quantity, x.Recipe.Retailprice, x.Recipe.RetailpriceOutputFormat)).ToList();
             Total.Content = db.OrderDetails.Where(x => x.OrderId == selectedOrder.Id).Select(x => x.Quantity * x.Recipe.Retailprice).Sum().ToString() + "€";
 
         }
