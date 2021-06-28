@@ -23,7 +23,7 @@ namespace Database
             {
                 Id = 1,
                 Name = "Aloe Vera 10-fach",
-                UnitsInStock = 10,
+                UnitsInStock = 3,
                 Netprice = 1.20,
                 Taxrate = 0.2,
                 Unit = "ml",
@@ -33,7 +33,7 @@ namespace Database
             {
                 Id = 2,
                 Name = "Aloe Vera Gel",
-                UnitsInStock = 15,
+                UnitsInStock = 2,
                 Netprice = 4.8,
                 Taxrate = 0.2,
                 Unit = "ml",
@@ -43,21 +43,11 @@ namespace Database
             {
                 Id = 3,
                 Name = "Alpha-Bisabolol",
-                UnitsInStock = 6,
+                UnitsInStock = 2,
                 Netprice = 4.8,
                 Taxrate = 0.2,
                 Unit = "ml",
                 Container = 5,
-            });
-            modelBuilder.Entity<Resource>().HasData(new Resource
-            {
-                Id = 4,
-                Name = "Bienenwachs weiß kbA",
-                UnitsInStock = 9,
-                Netprice = 7.0,
-                Taxrate = 0.15,
-                Unit = "g",
-                Container = 10,
             });
 
             //Recipe
@@ -79,15 +69,6 @@ namespace Database
                 Retailprice = 20,
                 Unit = "ml",
             });
-            modelBuilder.Entity<Recipe>().HasData(new Recipe
-            {
-                Id = 3,
-                Name = "Centella 30g",
-                Amount = 30,
-                Costprice = 20.0,
-                Retailprice = 25,
-                Unit = "mg",
-            });
 
             //RecipeDetail
             modelBuilder.Entity<RecipeDetail>().HasData(new RecipeDetail
@@ -105,6 +86,20 @@ namespace Database
                 ResourceId = 2,
             });
 
+            modelBuilder.Entity<RecipeDetail>().HasData(new RecipeDetail
+            {
+                Id = 3,
+                Quantity = 4,
+                RecipeId = 2,
+                ResourceId = 2,
+            });
+            modelBuilder.Entity<RecipeDetail>().HasData(new RecipeDetail
+            {
+                Id = 4,
+                Quantity = 2,
+                RecipeId = 2,
+                ResourceId = 1,
+            });
 
             //Customer
             modelBuilder.Entity<Customer>().HasData(new Customer
@@ -125,14 +120,6 @@ namespace Database
                 Phonenumber = 004306801534212,
 
             });
-            modelBuilder.Entity<Customer>().HasData(new Customer
-            {
-                Id = 3,
-                Firstname = "Pepe",
-                Lastname = "Fröhler",
-                Email = "banane24@gmx.at",
-                Phonenumber = 004306801135683,
-            });
 
             //Order
             modelBuilder.Entity<Order>().HasData(new Order
@@ -151,14 +138,6 @@ namespace Database
                 OrderDate = DateTime.Now,
                 DeliveryDate = DateTime.Now.AddDays(1),
                 Status = Status.Open,
-            });
-            modelBuilder.Entity<Order>().HasData(new Order
-            {
-                Id = 3,
-                CustomerId = 1,
-                OrderDate = DateTime.Now,
-                DeliveryDate = DateTime.Now.AddDays(1),
-                Status = Status.Done,
             });
 
             //OrderDetail
@@ -180,7 +159,7 @@ namespace Database
             {
                 Id = 3,
                 OrderId = 2,
-                RecipeId = 3,
+                RecipeId = 1,
                 Quantity = 1,
             });
 
