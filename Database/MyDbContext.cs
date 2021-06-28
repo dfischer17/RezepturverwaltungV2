@@ -25,8 +25,8 @@ namespace Database
         {
             if (!optionsBuilder.IsConfigured)
             {
-               var connectionString = @"server=(LocalDB)\mssqllocaldb;attachdbfilename=C:\mytemp\Recipe.mdf;database=Recipes;integrated security=True";
-               //var connectionString = @"server=(LocalDB)\mssqllocaldb;attachdbfilename=C:\Databases\Recipe.mdf;database=Recipes;integrated security=True";
+               //var connectionString = @"server=(LocalDB)\mssqllocaldb;attachdbfilename=C:\mytemp\Recipe.mdf;database=Recipes;integrated security=True";
+               var connectionString = @"server=(LocalDB)\mssqllocaldb;attachdbfilename=C:\Databases\Recipe.mdf;database=Recipes;integrated security=True";
                 optionsBuilder.UseSqlServer(connectionString);
             }
         }

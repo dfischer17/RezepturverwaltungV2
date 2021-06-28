@@ -29,8 +29,12 @@
                     <Label Content="Rechnungsnummer:"></Label>
                     <Label Width="200px" Margin="3 0 0 0"  Content="1"></Label>
                 </StackPanel>
-                <DataGrid x:Name="Orderpositions" Margin="0 0 0 20">
-
+                <DataGrid AutoGenerateColumns="False" x:Name="Orderpositions" Margin="0 0 0 20">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding RecipeName}" Header="Name"/>
+                        <DataGridTextColumn Binding="{Binding Quantity}" Header="Menge"/>
+                        <DataGridTextColumn Binding="{Binding RetailPriceOutput}" Header="Preis"/>
+                    </DataGrid.Columns>
                 </DataGrid>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                     <Label FontSize="20" Content="Summe:"></Label>
