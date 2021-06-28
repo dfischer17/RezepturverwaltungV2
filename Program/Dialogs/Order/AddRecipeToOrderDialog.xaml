@@ -26,6 +26,25 @@
                 <Label Content="Menge:"></Label>
                 <TextBox Name="amountTxtbox" Width="200"></TextBox>
             </StackPanel>
+            <ComboBox SelectedValuePath="Content" Margin="0 10 0 20" Name="cboVessels" >
+                <ComboBoxItem IsSelected="True" >Softlineflasche 50ml</ComboBoxItem>
+                <ComboBoxItem>Softlineflasche 100ml</ComboBoxItem>
+                <ComboBoxItem>Softlineflasche 150ml</ComboBoxItem>
+                <ComboBoxItem>Softlineflasche 250ml</ComboBoxItem>
+                <ComboBoxItem>Kristalldose 50ml Klarglas</ComboBoxItem>
+                <ComboBoxItem>Kristalldose 30ml Klarglas</ComboBoxItem>
+                <ComboBoxItem>Cremedose 50ml doppelwandig milchig</ComboBoxItem>
+                <ComboBoxItem>Cremedose 30ml doppelwandig milchig</ComboBoxItem>
+                <ComboBoxItem>Tubenflasche Monika 100ml</ComboBoxItem>
+                <ComboBoxItem>Klappovalfl 200ml</ComboBoxItem>
+                <ComboBoxItem>Klappovalfl 250ml</ComboBoxItem>
+                <ComboBoxItem>Universalflasche 200ml</ComboBoxItem>
+                <ComboBoxItem>Universalflasche 250ml</ComboBoxItem>
+                <ComboBoxItem>After-Shave-Flasche 100ml</ComboBoxItem>
+                <ComboBoxItem>Sprühflasche 100ml</ComboBoxItem>
+                <ComboBoxItem>Formflasche 250ml</ComboBoxItem>
+                <ComboBoxItem>Cremedose 30ml Novelle weiß doppelw.</ComboBoxItem>
+            </ComboBox>
         </StackPanel>
 
         <Button Margin="30 0 30 10" Height="30" Grid.Row="1" Content="Rezept zu Bestellung hinzufügen" Click="Button_Click"></Button>

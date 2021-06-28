@@ -47,6 +47,7 @@ namespace Program.Dialogs.Order
                 OrderId = selectedOrder.Id,
                 RecipeId = selectedRecipe.Id,
                 Quantity = int.Parse(amountTxtbox.Text),
+                Vessel = cboVessels.Text,
             };
             db.OrderDetails.Add(orderDetail);
             db.SaveChanges();

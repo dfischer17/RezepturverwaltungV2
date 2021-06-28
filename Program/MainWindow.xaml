@@ -179,6 +179,7 @@
                                 <DataGridTextColumn Binding="{Binding Recipe.Unit}" Header="Einheit"/>
                                 <DataGridTextColumn Binding="{Binding Quantity}" Header="Anzahl"/>
                                 <DataGridTextColumn Binding="{Binding Recipe.RetailpriceOutputFormat}" Header="Preis"/>
+                                <DataGridTextColumn Binding="{Binding Vessel}" Header="Gefäß"/>
                             </DataGrid.Columns>
                         </DataGrid>
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="15 0 0 30">
