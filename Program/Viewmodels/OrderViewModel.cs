@@ -149,11 +149,11 @@ namespace Viemodel
 
         public ICommand OpenAddRecipeToOrderDialogCommand => new RelayCommand<string>(
            OpenAddRecipeToOrderDialog,
-           x => SelectedOrder != null);
+           x => SelectedOrder != null && SelectedOrder.Status != Status.Done);
 
         public ICommand DeleteSelectedRecipeCommand => new RelayCommand<string>(
           DeleteSelectedRecipe,
-          x => SelectedRecipe != null);
+          x => SelectedRecipe != null && SelectedOrder.Status != Status.Done);
 
         public ICommand OpenBillDialogCommand => new RelayCommand<string>(
           OpenBillDialog,
@@ -161,7 +161,7 @@ namespace Viemodel
 
         public ICommand ReorderMissingResourcesCommand => new RelayCommand<string>(
             ReorderMissingResources,
-            x => MissingResources.Count > 0 && SelectedOrder != null );
+            x => MissingResources.Count > 0 && SelectedOrder != null && SelectedOrder.Status != Status.Done);
 
         public ICommand CompleteOrderCommand => new RelayCommand<string>(
             CompleteOrder,
@@ -208,7 +208,7 @@ namespace Viemodel
             resourceViewModel.Resources = db.Resources.AsObservableCollection();
         }
 
-        private static Dictionary<Resource, double> CalcMissingResources(ObservableCollection<Recipe> recipes)
+        private Dictionary<Resource, double> CalcMissingResources(ObservableCollection<Recipe> recipes)
         {
             Dictionary<Resource, double> resources = new Dictionary<Resource, double>();
 
@@ -223,7 +223,7 @@ namespace Viemodel
                     }
                     else if (amountToReorder < 0 && resources.ContainsKey(resource.Resource)) // Rohstoff schon bei fehlenden Rohstoffen
                     {
-                        resources[resource.Resource] += Math.Abs(amountToReorder); 
+                        resources[resource.Resource] += Math.Abs(resource.Quantity);
                     }
                 }
             }
@@ -250,7 +250,7 @@ namespace Viemodel
                         }
                         else if (amountToReorder < 0 && resources.ContainsKey(resource.Resource)) // Rohstoff schon bei fehlenden Rohstoffen
                         {
-                            resources[resource.Resource] += Math.Abs(amountToReorder);
+                            resources[resource.Resource] += Math.Abs(resource.Quantity);
                         }
                     }
 
@@ -276,6 +276,7 @@ namespace Viemodel
                 db.SaveChanges();
                 Orders = db.Orders.Where(x => x.CustomerId == SelectedCustomer.Id).AsObservableCollection();
             }
+            AllMissingResources = CalcAllMissingResources();
         }
 
         private void EditOrder(String obj)
@@ -286,6 +287,7 @@ namespace Viemodel
                 editOrderDialog.EditOrder();
                 Orders = db.Orders.Where(x => x.CustomerId == SelectedCustomer.Id).AsObservableCollection();
             }
+            AllMissingResources = CalcAllMissingResources();
         }
 
         private void DeleteSelectedOrder(string obj)
@@ -296,16 +298,18 @@ namespace Viemodel
             Orders = db.Orders.Where(x => x.CustomerId == SelectedCustomer.Id).AsObservableCollection();
             Recipes = new();
             MissingResources = new();
+            AllMissingResources = CalcAllMissingResources();
         }
 
         private void DeleteSelectedRecipe(string obj)
         {
             var recipe = SelectedRecipe as Recipe;
-
             var deleteOrderDetail = SelectedOrder.OrderDetails.Single(x => x.RecipeId == recipe.Id);
             db.OrderDetails.Remove(deleteOrderDetail);
             db.SaveChanges();
             Recipes = db.OrderDetails.Where(x => x.OrderId == SelectedOrder.Id).Select(x => x.Recipe).AsObservableCollection();
+            MissingResources = CalcMissingResources(Recipes);
+            AllMissingResources = CalcAllMissingResources();
         }
 
         private void OpenAddRecipeToOrderDialog(String obj)
