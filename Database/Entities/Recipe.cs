@@ -22,14 +22,14 @@ namespace Database.Entities
 
         public string CostpriceOutputFormat
         {
-            get { return $"{Costprice}€"; }
+            get { return $"{Costprice.ToString("C")}€"; }
             set { costpriceOutputFormat = value; }
         }
         private string retailpriceOutputFormat;
 
         public string RetailpriceOutputFormat
         {
-            get { return $"{Retailprice}€"; }
+            get { return $"{Retailprice.ToString("C")}€"; }
             set { retailpriceOutputFormat = value; }
         }
     }
