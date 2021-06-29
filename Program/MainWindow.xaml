@@ -114,8 +114,8 @@
                         </DataGrid>
 
                         <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="15 0 0 10">
-                            <Button Padding="2 2 2 2" FontSize="18" Content="Zutat hinzufügen" Margin="0 0 10 0" Command="{Binding OpenAddResourceToRecipeDialogCommand, Mode=OneWay}"></Button>
-                            <Button FontSize="18" Content="Zutat entfernen" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"></Button>
+                            <Button Padding="2 2 2 2" FontSize="18" Content="Rohstoff hinzufügen" Margin="0 0 10 0" Command="{Binding OpenAddResourceToRecipeDialogCommand, Mode=OneWay}"></Button>
+                            <Button FontSize="18" Content="Rohstoff entfernen" Command="{Binding DeleteSelectedResourceCommand, Mode=OneWay}"></Button>
                         </StackPanel>
                     </Grid>
                 </Grid>

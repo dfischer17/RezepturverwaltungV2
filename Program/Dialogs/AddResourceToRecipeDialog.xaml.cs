@@ -39,8 +39,7 @@ namespace Program.Dialogs
             {
                 RecipeId = selectedRecipe.Id,
                 ResourceId = selectedResource.Id,
-                Quantity = int.Parse(amountTxtbox.Text),
-                
+                Quantity = Double.Parse(amountTxtbox.Text.Replace('.', ',')),
             };
             db.RecipeDetails.Add(recipeDetail);
             db.SaveChanges();
